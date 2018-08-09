@@ -97,6 +97,14 @@ public class GSClient : IGSClient
 
         Array.Copy(version, 0, packet, versionStartIndex, 5);
 
-        Connection.Send(packet);
+        SendPacket(packet);
+    }
+
+    private void SendPacket(byte[] packet)
+    {
+        System.Threading.ThreadPool.QueueUserWorkItem((object state) =>
+        {
+            Connection.Send(packet);
+        });
     }
 }

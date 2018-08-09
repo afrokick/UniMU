@@ -66,13 +66,21 @@ public class CSClient : ICSClient
     {
         byte[] packet = { 0xC1, 0x04, 0xF4, 0x06 };
 
-        Connection.Send(packet);
+        SendPacket(packet);
     }
 
     public void GetServerInfo(ushort serverId)
     {
         byte[] packet = { 0xC1, 0x06, 0xF4, 0x03, 0x00, 0x00 };
 
-        Connection.Send(packet);
+        SendPacket(packet);
+    }
+
+    private void SendPacket(byte[] packet)
+    {
+        System.Threading.ThreadPool.QueueUserWorkItem((object state) =>
+        {
+            Connection.Send(packet);
+        });
     }
 }

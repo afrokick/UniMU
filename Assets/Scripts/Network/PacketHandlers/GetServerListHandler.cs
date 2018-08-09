@@ -3,8 +3,6 @@ using log4net;
 
 public class GetServerListHandler : IPacketHandler
 {
-    private readonly ILog log = LogManager.GetLogger(typeof(GetServerListHandler));
-
     [Inject]
     public ServerListUpdatedSignal ServerListUpdatedSignal { get; set; }
 

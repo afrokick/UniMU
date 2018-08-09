@@ -55,9 +55,6 @@ public class MainContext : SignalContext
         injectionBinder.Bind<IStorageService>().To<StorageService>().ToSingleton();
         injectionBinder.Bind<ICoroutineExecuter>().To<CoroutineExecuter>().ToSingleton();
         injectionBinder.Bind<IStateMachine>().To<StateMachine>().ToSingleton();
-        //injectionBinder.Bind<SoundService>().ToValue(GameObject.FindObjectOfType<SoundService>());
-
-
 
         BindStates();
         BindViews();
@@ -65,37 +62,29 @@ public class MainContext : SignalContext
         //signals and command
         commandBinder.Bind<AppQuitSignal>();
         commandBinder.Bind<AppStartSignal>()
-            .InSequence()
-            .To<AppStartCommand>()
-            .To<OpenPreloaderCommand>()
-                     .To<OpenSelectServerCommand>()
-            .Once();
+                     .InSequence()
+                     .To<AppStartCommand>()
+                     .To<LoadStateCommand<PreloaderState>>()
+                     .To<LoadStateCommand<SelectServerState>>()
+                     .Once();
 
         commandBinder.Bind<HardwareBackPressSignal>();
 
-        commandBinder.Bind<OpenSelectServerScreenSignal>()
-            .InSequence()
-                     .To<OpenSelectServerCommand>();
+        commandBinder.Bind<OpenAlertSignal>().To<OpenAlertCommand>();
 
-
-        //commandBinder.Bind<OpenLevelsMenuSignal>()
-        //.InSequence()
-        //.To<OpenLevelsMenuCommand>();
+        commandBinder.Bind<OpenSelectServerScreenSignal>().To<LoadStateCommand<SelectServerState>>();
+        commandBinder.Bind<OpenLoginScreenSignal>().To<LoadStateCommand<LoginState>>();
 
         commandBinder.Bind<ServerListUpdatedSignal>();
-
-        //commandBinder.Bind<InternetStateChangedSignal>();
-        //commandBinder.Bind<OpenCheckInternetSignal>().To<OpenCheckInternetCommand>();
-
-        commandBinder.Bind<OpenAlertSignal>().To<OpenAlertCommand>();
+        commandBinder.Bind<ServerListItemUpdatedSignal>();
     }
 
     private void BindStates()
     {
+        BindAsSelf<AlertState>();
         BindAsSelf<PreloaderState>();
         BindAsSelf<SelectServerState>();
-        BindAsSelf<GameState>();
-        BindAsSelf<AlertState>();
+        BindAsSelf<LoginState>();
     }
 
     private void BindAsSelf<T>()
@@ -105,11 +94,12 @@ public class MainContext : SignalContext
 
     private void BindViews()
     {
-        InjectScreen<PreloaderScreen>("preloader");
-        InjectScreen<SelectServerScreen>("selectServer");
         InjectScreen<AlertPopup>("alert");
         InjectScreen<LoaderPopup>("loader");
-        //InjectScreen<CheckInternetPopup>("check_connect");
+
+        InjectScreen<PreloaderScreen>("preloader");
+        InjectScreen<SelectServerScreen>("selectServer");
+        InjectScreen<LoginScreen>("login");
     }
 
     private strange.extensions.injector.api.IInjectionBinding InjectScreen<T>(string name) where T : BasePopup

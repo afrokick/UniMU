@@ -1,16 +1,18 @@
-﻿using log4net;
-using MUnique.OpenMU.Network;
+﻿using MUnique.OpenMU.Network;
 
 public class GetServerInfoHandler : IPacketHandler
 {
-    private readonly ILog log = LogManager.GetLogger(typeof(GetServerInfoHandler));
+    [Inject]
+    public ServerListItemUpdatedSignal ServerListItemUpdatedSignal { get; set; }
 
     public void HandlePacket(object sender, Packet packet)
     {
         packet.ReadByte();
         var ip = packet.ReadString(16);
-        int port = packet.Data.MakeWordBigEndian(packet.Size - 2);
+        var port = packet.Data.MakeWordBigEndian(packet.Size - 2);
 
-        log.Debug($"server info ip:{ip} port:{port}");
+        var model = new ServerListItemInfoModel { Ip = ip, Port = port };
+
+        ServerListItemUpdatedSignal.Dispatch(model);
     }
 }
