@@ -1,0 +1,900 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MUnique.OpenMU.Interfaces</name>
+    </assembly>
+    <members>
+        <member name="T:MUnique.OpenMU.Interfaces.ChatServerAuthenticationInfo">
+            <summary>
+            Authentication info of a chat server client.
+            This is created by the chatserver through <see cref="M:MUnique.OpenMU.Interfaces.IChatServer.RegisterClient(System.UInt16,System.String)"/>
+            and the chat client needs to provide all of this information to authenticate itself.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.ChatServerAuthenticationInfo.#ctor(System.Byte,System.UInt16,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.Interfaces.ChatServerAuthenticationInfo" /> class.
+            </summary>
+            <param name="index">The index of the client in the room.</param>
+            <param name="roomId">The room identifier.</param>
+            <param name="clientName">Name of the client.</param>
+            <param name="authenticationToken">The authentication token.</param>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.ChatServerAuthenticationInfo.Index">
+            <summary>
+            Gets the index of the client in the room.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.ChatServerAuthenticationInfo.RoomId">
+            <summary>
+            Gets the room identifier of the room which is reserved for the client.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.ChatServerAuthenticationInfo.ClientName">
+            <summary>
+            Gets the name of the client, usually character name.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.ChatServerAuthenticationInfo.AuthenticationToken">
+            <summary>
+            Gets the authentication token. It's like a random passwort which the client has to provide to enter the chat room.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.ChatServerAuthenticationInfo.AuthenticationRequiredUntil">
+            <summary>
+            Gets the datetime until a authentication of at least two clients is required. If this time passed by, the chat room will be closed automatically.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.Friend">
+            <summary>
+            The friend class used by the <see cref="T:MUnique.OpenMU.Interfaces.IFriendServer"/>.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.Friend.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.Friend.CharacterId">
+            <summary>
+            Gets or sets the id of the character.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.Friend.FriendId">
+            <summary>
+            Gets or sets the id of the friend character.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.Friend.Accepted">
+            <summary>
+            Gets or sets a value indicating whether the friend request got accepted.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.Friend.RequestOpen">
+            <summary>
+            Gets or sets a value indicating whether this request is open.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.FriendViewItem">
+            <summary>
+            A friend view item, which includes the character names.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.FriendViewItem.CharacterName">
+            <summary>
+            Gets or sets the name of the character.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.FriendViewItem.FriendName">
+            <summary>
+            Gets or sets the name of the friend.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.ServerStateToGameStateObserverAdapter">
+            <summary>
+            An adapter which implements <see cref="T:MUnique.OpenMU.Interfaces.IGameStateObserver"/> for an instance of <see cref="T:MUnique.OpenMU.Interfaces.IServerStateObserver"/>.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.ServerStateToGameStateObserverAdapter.#ctor(MUnique.OpenMU.Interfaces.IServerStateObserver,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.Interfaces.ServerStateToGameStateObserverAdapter"/> class.
+            </summary>
+            <param name="serverStateObserver">The server state observer.</param>
+            <param name="serverId">The server identifier.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.ServerStateToGameStateObserverAdapter.PlayerCountChanged(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.Guild">
+            <summary>
+            A guild is a group of players who like to play together.
+            </summary>
+            <remarks>
+            You may wonder where the Id is. The original server and this <see cref="T:MUnique.OpenMU.Interfaces.IGuildServer"/> uses an integer id for guilds, too.
+            I decided to manage these keys in memory and on demand, they are not persistent.
+            I could've used an integer Id as primary key in the persistent Guild class, but don't do it by purpose:
+            We would lose the ability to easily merge two databases (realms), if we do that. Even if we use a separate integer id column in the database,
+            it needs to be re-assigned after a merge.
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.Guild.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.Guild.Logo">
+            <summary>
+            Gets or sets the logo.
+            </summary>
+            <remarks>
+            It's like a 16 color 8x8 pixel bitmap, therefore has a size of 32 bytes.
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.Guild.Score">
+            <summary>
+            Gets or sets the score.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.Guild.Notice">
+            <summary>
+            Gets or sets the guild notice which can be set by the guild master
+            </summary>
+            <remarks>Visible in green color after a character entered the game.</remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.Guild.Hostility">
+            <summary>
+            Gets or sets the hostile guild. Members of a hostile guild can be killed without consequences.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.Guild.AllianceGuild">
+            <summary>
+            Gets or sets the parent alliance guild.
+            </summary>
+            <value>
+            The alliance guild.
+            </value>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.GuildMemberStatus">
+            <summary>
+            The guild member status of a guild member.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.GuildMemberStatus.#ctor(System.UInt32,MUnique.OpenMU.Interfaces.GuildPosition)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.Interfaces.GuildMemberStatus"/> class.
+            </summary>
+            <param name="guildId">The guild identifier.</param>
+            <param name="position">The position.</param>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.GuildMemberStatus.GuildId">
+            <summary>
+            Gets the guild identifier.
+            </summary>
+            <value>
+            The guild identifier.
+            </value>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.GuildMemberStatus.Position">
+            <summary>
+            Gets the position.
+            </summary>
+            <value>
+            The position.
+            </value>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.GuildPosition">
+            <summary>
+            The position of a character in a guild.
+            Some of them have special skills in the castle siege event.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.Interfaces.GuildPosition.NormalMember">
+            <summary>
+            A normal guild member.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.Interfaces.GuildPosition.GuildMaster">
+            <summary>
+            The guild master.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.Interfaces.GuildPosition.BattleMaster">
+            <summary>
+            The battle master.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.IChatServer">
+            <summary>
+            The interface for a chat server.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IChatServer.RegisterClient(System.UInt16,System.String)">
+            <summary>
+            Registers the client to the server.
+            </summary>
+            <param name="roomId">The room identifier.</param>
+            <param name="clientName">Name of the client.</param>
+            <returns>The success.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IChatServer.CreateChatRoom">
+            <summary>
+            Creates the chat room.
+            </summary>
+            <returns>The new chat room id.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IChatServer.GetIPAddress">
+            <summary>
+            Gets the ip address.
+            </summary>
+            <returns>The ip address.</returns>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.IConnectServer">
+            <summary>
+            The interface for a connect server.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IConnectServer.RegisterGameServer(MUnique.OpenMU.Interfaces.IGameServerInfo,System.Net.IPEndPoint)">
+            <summary>
+            Registers the game server, so that it can be accessed through the connect server.
+            </summary>
+            <param name="gameServer">The game server.</param>
+            <param name="publicEndPoint">The public end point.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IConnectServer.UnregisterGameServer(MUnique.OpenMU.Interfaces.IGameServerInfo)">
+            <summary>
+            Unregisters the game server.
+            </summary>
+            <param name="gameServer">The game server.</param>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.SpecialServerId">
+            <summary>
+            Defines some server ids which are used for some specific states.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.Interfaces.SpecialServerId.Offline">
+            <summary>
+            Gets the server id which represents being offline.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.Interfaces.SpecialServerId.Invisible">
+            <summary>
+            Gets the server id which represents being invisible (=offline to other players).
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.IFriendServer">
+            <summary>
+            The friend server interface.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IFriendServer.ForwardLetter(MUnique.OpenMU.Interfaces.LetterHeader)">
+            <summary>
+            Forwards the letter.
+            </summary>
+            <param name="letter">The letter.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IFriendServer.FriendResponse(System.String,System.String,System.Boolean)">
+            <summary>
+            Handles the friend request response.
+            </summary>
+            <param name="characterName">The character name of the responder.</param>
+            <param name="friendName">The character name of the requester.</param>
+            <param name="accepted">Indicating whether the request got accepted.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IFriendServer.CreateChatRoom(System.String,System.String)">
+            <summary>
+            Creates a new chat room.
+            </summary>
+            <param name="playerName">Name of the player who is creating the chat room.</param>
+            <param name="friendName">Name of the friend who should be invited to the chat room.</param>
+            <returns>The authentication information for the <paramref name="playerName"/>.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IFriendServer.GetFriendList(System.Guid)">
+            <summary>
+            Gets the friend list of a character.
+            </summary>
+            <param name="characterId">Id of the character.</param>
+            <returns>The friend list of a character.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IFriendServer.SetOnlineState(System.Guid,System.String,System.Int32)">
+            <summary>
+            Sets the online state of a character.
+            </summary>
+            <param name="characterId">Id of the character.</param>
+            <param name="characterName">Name of the character.</param>
+            <param name="serverId">The server identifier.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IFriendServer.GetChatserverIP">
+            <summary>
+            Gets the chat server ip.
+            </summary>
+            <returns>The chat server ip.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IFriendServer.FriendRequest(System.String,System.String)">
+            <summary>
+            Sends a friend request to the friend, and adds a new friend view item to the players friend list.
+            </summary>
+            <param name="playerName">The name of the requesting player.</param>
+            <param name="friendName">The name of the requested friend.</param>
+            <returns>If a new friend view item got added to the players friend list.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IFriendServer.DeleteFriend(System.String,System.String)">
+            <summary>
+            Deletes the friend.
+            </summary>
+            <param name="name">The player who is deleting a friend from his friendlist.</param>
+            <param name="friendName">Name of the friend who should be deleted.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IFriendServer.GetOpenFriendRequests(System.Guid)">
+            <summary>
+            Returns the character names of all open friend requests.
+            </summary>
+            <param name="characterId">Character id.</param>
+            <returns>The character names of all open friend requests.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IFriendServer.InviteFriendToChatRoom(System.String,System.String,System.UInt16)">
+            <summary>
+            Invites a friend to an existing chat room.
+            </summary>
+            <param name="selectedCharacterName">Name of the selected character.</param>
+            <param name="friendName">Name of the friend.</param>
+            <param name="roomNumber">The room number.</param>
+            <returns>The success of the invitation.</returns>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.ServerState">
+            <summary>
+            The state of the server.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.Interfaces.ServerState.Stopped">
+            <summary>
+            The server has finished stopping.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.Interfaces.ServerState.Starting">
+            <summary>
+            The server is currenctly starting, but has not yet finished initialization.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.Interfaces.ServerState.Started">
+            <summary>
+            The server started and is available.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.Interfaces.ServerState.Stopping">
+            <summary>
+            The server is not available anymore and is stopping it's services.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.MessageType">
+            <summary>
+            Types of messages.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.Interfaces.MessageType.GoldenCenter">
+            <summary>
+            The message is shown as centered golden message in the client.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.Interfaces.MessageType.BlueNormal">
+            <summary>
+            The message is shown as blue entry.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.IGameServer">
+            <summary>
+            Interface for the inter-server communication.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.IGameServer.ServerInfo">
+            <summary>
+            Gets the server information.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGameServer.GuildChatMessage(System.UInt32,System.String,System.String)">
+            <summary>
+            Sends a chat message to all connected guild members.
+            </summary>
+            <param name="guildId">The guild identifier.</param>
+            <param name="sender">The sender character name.</param>
+            <param name="message">The message which should be sent.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGameServer.GuildDeleted(System.UInt32)">
+            <summary>
+            Notifies the game server that a guild got deleted.
+            </summary>
+            <param name="guildId">The guild identifier.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGameServer.GuildPlayerKicked(System.String)">
+            <summary>
+            Notifies the game server that a guild member got removed from a guild.
+            </summary>
+            <param name="playerName">Name of the player which got removed from a guild.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGameServer.AllianceChatMessage(System.UInt32,System.String,System.String)">
+            <summary>
+            Sends a chat message to all connected alliance members.
+            </summary>
+            <param name="guildId">The guild identifier.</param>
+            <param name="sender">The sender character name.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGameServer.LetterReceived(MUnique.OpenMU.Interfaces.LetterHeader)">
+            <summary>
+            Notifies the game server that a letter got received for an online player.
+            </summary>
+            <param name="letter">The letter header.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGameServer.IsPlayerOnline(System.String)">
+            <summary>
+            Determines whether the player with the specified name is online.
+            </summary>
+            <param name="playerName">Name of the character.</param>
+            <returns>True, if online; False, otherwise.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGameServer.IsAccountOnline(System.String)">
+            <summary>
+            Determines whether the account with the specified name is online.
+            </summary>
+            <param name="accountName">Name of the account.</param>
+            <returns>True, if online; False, otherwise.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGameServer.SendGlobalMessage(System.String,MUnique.OpenMU.Interfaces.MessageType)">
+            <summary>
+            Sends a global message to all connected players with the specified message type.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="messageType">Type of the message.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGameServer.FriendRequest(System.String,System.String)">
+            <summary>
+            Notifies the server that a player made a friend request to another player, which is online on this server.
+            </summary>
+            <param name="requester">The requester.</param>
+            <param name="receiver">The receiver.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGameServer.FriendOnlineStateChanged(System.String,System.String,System.Int32)">
+            <summary>
+            Notifies the game server that a friend online state changed.
+            </summary>
+            <param name="player">The player who is playing on the server, and needs to get notified.</param>
+            <param name="friend">The friend whose state changed.</param>
+            <param name="serverId">The new server identifier of the <paramref name="friend"/>.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGameServer.ChatRoomCreated(MUnique.OpenMU.Interfaces.ChatServerAuthenticationInfo,System.String)">
+            <summary>
+            Notifies the game server that a chat room got created on the chat server for a player which is online on this game server.
+            </summary>
+            <param name="playerAuthenticationInfo">Authentication information of the player who should get notified about the created chat room.</param>
+            <param name="friendName">Name of the friend player which is expected to be in the chat room.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGameServer.RegisterMapObserver(System.UInt16,System.Object)">
+            <summary>
+            Registers an observers to a game map.
+            </summary>
+            <param name="mapId">The id of the map.</param>
+            <param name="worldObserver">The world observer.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGameServer.UnregisterMapObserver(System.UInt16,System.UInt16)">
+            <summary>
+            Unregisters the map observer.
+            </summary>
+            <param name="mapId">The map identifier.</param>
+            <param name="worldObserverId">The world observer identifier.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGameServer.DisconnectPlayer(System.String)">
+            <summary>
+            Disconnects the player from the game.
+            </summary>
+            <param name="playerName">Name of the player.</param>
+            <returns>True, if the player has been disconnected; False, otherwise.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGameServer.BanPlayer(System.String)">
+            <summary>
+            Bans the player from the game.
+            </summary>
+            <param name="playerName">Name of the player.</param>
+            <returns>True, if the player has been banned; False, otherwise.</returns>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.IGameServerInfo">
+            <summary>
+            Informations about a game server.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.IGameServerInfo.Id">
+            <summary>
+            Gets the identifier.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.IGameServerInfo.Description">
+            <summary>
+            Gets the description.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.IGameServerInfo.State">
+            <summary>
+            Gets the state.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.IGameServerInfo.OnlinePlayerCount">
+            <summary>
+            Gets the online player count.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.IGameServerInfo.MaximumPlayers">
+            <summary>
+            Gets the maximum number of players.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.IGameServerInfo.Maps">
+            <summary>
+            Gets the maps which are hosted on this server.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.IGameMapInfo">
+            <summary>
+            Information about a concrete instance of a game map.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.IGameMapInfo.MapNumber">
+            <summary>
+            Gets the map number.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.IGameMapInfo.MapName">
+            <summary>
+            Gets the name of the map.
+            </summary>
+            <value>
+            The name of the map.
+            </value>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.IGameMapInfo.TerrainData">
+            <summary>
+            Gets the terrain data of the map.
+            </summary>
+            <value>
+            The terrain data.
+            </value>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.IGameMapInfo.Players">
+            <summary>
+            Gets the players which are currently playing on the map.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.IPlayerInfo">
+            <summary>
+            Information about a player.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.IPlayerInfo.HostAdress">
+            <summary>
+            Gets the host adress.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.IPlayerInfo.CharacterName">
+            <summary>
+            Gets the name of the character.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.IPlayerInfo.AccountName">
+            <summary>
+            Gets the name of the account.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.IPlayerInfo.LocationX">
+            <summary>
+            Gets the x coordinate on the game map.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.IPlayerInfo.LocationY">
+            <summary>
+            Gets the y coordinate on the game map.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.IGameStateObserver">
+            <summary>
+            Interface for an observer which observes the state of a game.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGameStateObserver.PlayerCountChanged(System.Int32)">
+            <summary>
+            Notifies about a changed player count.
+            </summary>
+            <param name="playerCount">The player count.</param>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.IGuildServer">
+            <summary>
+            Interface for the guild server.
+            </summary>
+            <remarks>
+            A little note about the guild id:
+              The original GMO server uses an 32-bit integer in all of its messages. However, actually it's only using (or used?) 16 bits of it for created guilds (see struct SDHP_GUILDCREATED).
+              Some people may remember the "guildbug" on GMO - I guess the keys exceeded these 16 bits and somehow caused a crash... but after restart of the servers it started working again.
+            </remarks>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGuildServer.GuildMessage(System.UInt32,System.String,System.String)">
+            <summary>
+            Notifies the guild server that a guild message was sent and maybe needs to be forwarded to the game servers.
+            </summary>
+            <param name="guildId">The guild id.</param>
+            <param name="sender">The sender.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGuildServer.AllianceMessage(System.UInt32,System.String,System.String)">
+            <summary>
+            Notifies the guild server that an alliance message was sent and maybe needs to be forwarded to the game servers.
+            </summary>
+            <param name="guildId">The guild id.</param>
+            <param name="sender">The sender.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGuildServer.GuildExists(System.String)">
+            <summary>
+            Checks if the guild with the specified name exists.
+            </summary>
+            <param name="guildName">Name of the guild.</param>
+            <returns>True, if the guild exists; False, otherwise.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGuildServer.GetGuild(System.UInt32)">
+            <summary>
+            Gets the guild by the guild identifier.
+            </summary>
+            <param name="guildId">The guild identifier.</param>
+            <returns>The guild.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGuildServer.CreateGuild(System.String,System.String,System.Guid,System.Byte[],System.Byte)">
+            <summary>
+            Creates the guild and sets the guild master online at the guild server. A separate call to <see cref="M:MUnique.OpenMU.Interfaces.IGuildServer.PlayerEnteredGame(System.Guid,System.String,System.Byte)"/> is not required.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="masterName">Name of the master.</param>
+            <param name="masterId">The master identifier.</param>
+            <param name="logo">The logo.</param>
+            <param name="serverId">The identifier of the server on which the guild is getting created.</param>
+            <returns>The guild member status of the creator (guild master).</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGuildServer.CreateGuildMember(System.UInt32,System.Guid,System.String,MUnique.OpenMU.Interfaces.GuildPosition,System.Byte)">
+            <summary>
+            Creates the guild member and sets it online at the guild server. A separate call to <see cref="M:MUnique.OpenMU.Interfaces.IGuildServer.PlayerEnteredGame(System.Guid,System.String,System.Byte)"/> is not required.
+            </summary>
+            <param name="guildId">The guild identifier.</param>
+            <param name="characterId">The identifier.</param>
+            <param name="characterName">The name.</param>
+            <param name="role">The role of the member.</param>
+            <param name="serverId">The identifier of the server on which the guild member is getting created.</param>
+            <returns>The created guild member info.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGuildServer.ChangeGuildMemberPosition(System.UInt32,System.Guid,MUnique.OpenMU.Interfaces.GuildPosition)">
+            <summary>
+            Updates the guild member position.
+            </summary>
+            <param name="guildId">The guild identifier.</param>
+            <param name="characterId">The id of the character.</param>
+            <param name="role">The role.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGuildServer.PlayerEnteredGame(System.Guid,System.String,System.Byte)">
+            <summary>
+            Notifies the guild server that a player (potential guild member) entered the game.
+            </summary>
+            <param name="characterId">The character identifier.</param>
+            <param name="characterName">Name of the character.</param>
+            <param name="serverId">The identifier of the server on which the guild member entered.</param>
+            <returns>The guild member status if it's a guild member; Otherwise, null.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGuildServer.GuildMemberLeftGame(System.UInt32,System.Guid,System.Byte)">
+            <summary>
+            Notifies the guild server that a guild member left the game.
+            </summary>
+            <param name="guildId">The guild identifier.</param>
+            <param name="guildMemberId">The identifier of the guild member.</param>
+            <param name="serverId">The identifier of the server from which the guild member left.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGuildServer.GetGuildList(System.UInt32)">
+            <summary>
+            Gets the guild member list.
+            </summary>
+            <param name="guildId">The guild identifier.</param>
+            <returns>The guild member list.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IGuildServer.KickMember(System.UInt32,System.String)">
+            <summary>
+            Kicks a guild member from a guild.
+            </summary>
+            <param name="guildId">The guild identifier.</param>
+            <param name="playerName">Name of the player which is getting kicked.</param>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.GuildListEntry">
+            <summary>
+            The guild list entry.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.GuildListEntry.PlayerName">
+            <summary>
+            Gets or sets the name of the player.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.GuildListEntry.ServerId">
+            <summary>
+            Gets or sets the server identifier on which the player is playing.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.GuildListEntry.PlayerPosition">
+            <summary>
+            Gets or sets the players position in the guild.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.ILoginServer">
+            <summary>
+            Interface of the login server, which keeps track of all connected accounts.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.ILoginServer.TryLogin(System.String,System.Byte)">
+            <summary>
+            Tries to login the account on the specified server.
+            </summary>
+            <param name="accountName">Name of the account.</param>
+            <param name="serverId">The server identifier.</param>
+            <returns>The success.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.ILoginServer.LogOff(System.String,System.Byte)">
+            <summary>
+            Logs the account off from the specified server.
+            </summary>
+            <param name="accountName">Name of the account.</param>
+            <param name="serverId">The server identifier.</param>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.IManageableServer">
+            <summary>
+            General interface for a server which provides some informations and functions to manage it from outside.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.IManageableServer.Id">
+            <summary>
+            Gets the identifier of the server.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.IManageableServer.Description">
+            <summary>
+            Gets the description.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.IManageableServer.ServerState">
+            <summary>
+            Gets the current state of the server.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.IManageableServer.MaximumConnections">
+            <summary>
+            Gets the maximum number of connections the server can handle.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.IManageableServer.CurrentConnections">
+            <summary>
+            Gets the current connection count.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IManageableServer.Start">
+            <summary>
+            Starts the server.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IManageableServer.Shutdown">
+            <summary>
+            Stops the server.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.IMapStateObserver">
+            <summary>
+            An interface of a class which observes the map state.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IMapStateObserver.PlayerCountChanged(System.Int32,System.Int32)">
+            <summary>
+            Notifies about player count changes on the specified map.
+            </summary>
+            <param name="mapId">The map identifier.</param>
+            <param name="playerCount">The player count.</param>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.IServerStateObserver">
+            <summary>
+            An interface of an observer which observes the state of a server.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IServerStateObserver.GetMapStateObserver(System.Int32)">
+            <summary>
+            Gets the map state observer for the specified server identifier.
+            </summary>
+            <param name="serverId">The server identifier.</param>
+            <returns>The map state observer for the specified server identifier</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IServerStateObserver.ServerStateChanged(System.Int32,MUnique.OpenMU.Interfaces.ServerState)">
+            <summary>
+            Notifies the client after the state of the specified server has been changed.
+            </summary>
+            <param name="serverId">The server identifier.</param>
+            <param name="newState">The new state.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IServerStateObserver.PlayerCountChanged(System.Int32,System.Int32)">
+            <summary>
+            Notifies the client after the player count of the specified server has been changed.
+            </summary>
+            <param name="serverId">The server identifier.</param>
+            <param name="playerCount">The player count.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IServerStateObserver.MapAdded(System.Int32,MUnique.OpenMU.Interfaces.IGameMapInfo)">
+            <summary>
+            Notifies the client after a map instance has been added to the server.
+            </summary>
+            <param name="serverId">The server identifier.</param>
+            <param name="mapInfo">The map information.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Interfaces.IServerStateObserver.MapRemoved(System.Int32,System.Int32)">
+            <summary>
+            Notifies the client after a map instance has been removed from the server.
+            </summary>
+            <param name="serverId">The server identifier.</param>
+            <param name="mapId">The map identifier.</param>
+            <remarks>
+            Currently, no maps ever get removed. In the future it might be needed, because maps could be dynamically added and removed,
+            e.g. for events or because maps could be created/removed by demand.
+            </remarks>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.LetterHeader">
+            <summary>
+            The header of a letter.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.LetterHeader.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.LetterHeader.Sender">
+            <summary>
+            Gets or sets the sender.
+            </summary>
+            <remarks>
+            TODO: Reference to character id needed?
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.LetterHeader.Receiver">
+            <summary>
+            Gets or sets the receiver.
+            </summary>
+            <remarks>
+            TODO: Reference to character id needed?
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.LetterHeader.Subject">
+            <summary>
+            Gets or sets the subject.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.LetterHeader.LetterDate">
+            <summary>
+            Gets or sets the letter date.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Interfaces.LetterHeader.ReadFlag">
+            <summary>
+            Gets or sets a value indicating whether the letter has been read.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Interfaces.SpecialServerIds">
+            <summary>
+            Special server ids.
+            </summary>
+            <remarks>Ids from 0 to 0xFFFF are reserved to game servers.</remarks>
+        </member>
+        <member name="F:MUnique.OpenMU.Interfaces.SpecialServerIds.ConnectServer">
+            <summary>
+            The connect server special server id.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.Interfaces.SpecialServerIds.ChatServer">
+            <summary>
+            The chat server special server id.
+            </summary>
+        </member>
+    </members>
+</doc>

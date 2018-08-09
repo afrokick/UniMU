@@ -1,0 +1,385 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MUnique.OpenMU.Persistence</name>
+    </assembly>
+    <members>
+        <member name="T:MUnique.OpenMU.Persistence.BaseRepositoryManager">
+            <summary>
+            The base repository manager.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Persistence.BaseRepositoryManager.Repositories">
+            <summary>
+            Gets the repositories for each entity type.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.BaseRepositoryManager.GetRepository``1">
+            <summary>
+            Gets the repository of the specified generic type.
+            </summary>
+            <typeparam name="T">The generic type.</typeparam>
+            <returns>The repository of the specified generic type.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.BaseRepositoryManager.GetRepository(System.Type)">
+            <summary>
+            Gets the repository of the specified type.
+            </summary>
+            <param name="objectType">Type of the object.</param>
+            <returns>The repository of the specified type.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.BaseRepositoryManager.InternalGetRepository(System.Type)">
+            <summary>
+            Gets the repository of the specified type.
+            </summary>
+            <param name="objectType">Type of the object.</param>
+            <returns>The repository of the specified type.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.BaseRepositoryManager.RegisterRepository``1(MUnique.OpenMU.Persistence.IRepository{``0})">
+            <summary>
+            Registers the repository.
+            </summary>
+            <typeparam name="T">The generic type which the repository handles.</typeparam>
+            <param name="repository">The repository.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.BaseRepositoryManager.RegisterRepository(System.Type,MUnique.OpenMU.Persistence.IRepository)">
+            <summary>
+            Registers the repository.
+            </summary>
+            <param name="type">The generic type which the repository handles.</param>
+            <param name="repository">The repository.</param>
+        </member>
+        <member name="T:MUnique.OpenMU.Persistence.IContext">
+            <summary>
+            The context for repository actions.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IContext.SaveChanges">
+            <summary>
+            Saves the changes of the context.
+            </summary>
+            <returns><c>True</c>, if the saving was successful; <c>false</c>, otherwise.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IContext.Detach(System.Object)">
+            <summary>
+            Detaches the specified item from the context, if required.
+            All reachable navigations are recursively detached from the context, too.
+            </summary>
+            <param name="item">The item which should be detached.</param>
+            <remarks>
+            When calling this method, be sure to clear a back reference property before. Otherwise you might detach more than you intended.
+            </remarks>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IContext.Attach(System.Object)">
+            <summary>
+            Attaches the specified item to the context in an unmodified state.
+            All reachable navigations are recursively attached to the context, too.
+            </summary>
+            <param name="item">The item which should be attached.</param>
+            <remarks>
+            When calling this method, be sure to clear a previous back reference property before. Otherwise you might attach more than you intended.
+            </remarks>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IContext.CreateNew``1(System.Object[])">
+            <summary>
+            Creates a new instance of <typeparamref name="T" />.
+            Attention: This operation needs a currently used context in the current thread!.
+            </summary>
+            <typeparam name="T">The type which should get created.</typeparam>
+            <param name="args">The arguments.</param>
+            <returns>
+            A new instance of <typeparamref name="T" />.
+            </returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IContext.Delete``1(``0)">
+            <summary>
+            Deletes the specified object.
+            </summary>
+            <typeparam name="T">The type of the object.</typeparam>
+            <param name="obj">The object.</param>
+            <returns><c>True</c>, if successful; Otherwise, false.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IContext.GetById``1(System.Guid)">
+            <summary>
+            Gets the object of the specified type by its identifier.
+            </summary>
+            <typeparam name="T">The type of the requested object.</typeparam>
+            <param name="id">The identifier.</param>
+            <returns>The object of the specified type by its identifier.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IContext.Get``1">
+            <summary>
+            Gets all objects of the specified type. Use with caution!
+            </summary>
+            <typeparam name="T">The type of the requested objects.</typeparam>
+            <returns>All objects of the specified type.</returns>
+        </member>
+        <member name="T:MUnique.OpenMU.Persistence.IdGenerator">
+            <summary>
+            A generator which generates id which should be unique within an instance of a generator.
+            Ids which are no longer used can be given back to the generator, e.g. when an object joins a game map,
+            it gets an id, later when it leaves the map, it gives the id back, so another player can use it.
+            </summary>
+            <remarks>
+            The namespace for this class is probably not the right one - we're missing something like a "Utility" namespace for things like that.
+            </remarks>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IdGenerator.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.Persistence.IdGenerator"/> class.
+            </summary>
+            <param name="firstValue">The first value.</param>
+            <param name="maxValue">The maximum value.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IdGenerator.GetId">
+            <summary>
+            Gets an identifier which is unique within this generator instance.
+            </summary>
+            <returns>An identifier which is unique within this generator instance.</returns>
+            <exception cref="T:System.InvalidOperationException">Maximum object id exceeded</exception>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IdGenerator.GiveBack(System.Int32)">
+            <summary>
+            Gives the id back for further usage by the next object.
+            </summary>
+            <param name="id">The identifier.</param>
+        </member>
+        <member name="T:MUnique.OpenMU.Persistence.IFriendServerContext">
+            <summary>
+            A context which is used by the <see cref="T:MUnique.OpenMU.Interfaces.IFriendServer" />.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IFriendServerContext.CreateNewFriend(System.String,System.String)">
+            <summary>
+            Creates a new friend view item.
+            </summary>
+            <param name="characterName">Name of the character.</param>
+            <param name="friendName">Name of the friend.</param>
+            <returns>The created friend view item.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IFriendServerContext.GetFriendByNames(System.String,System.String)">
+            <summary>
+            Gets the friend view item by friend.
+            </summary>
+            <param name="characterName">Name of the character holding the friend view item in its friendlist.</param>
+            <param name="friendName">Name of the friend.</param>
+            <returns>The friend view item of the friend.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IFriendServerContext.GetFriends(System.Guid)">
+            <summary>
+            Gets the friends of a character.
+            </summary>
+            <param name="characterId">Id of the character.</param>
+            <returns>The friends of the character.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IFriendServerContext.GetFriendNames(System.Guid)">
+            <summary>
+            Gets the friend names of a character.
+            </summary>
+            <param name="characterId">Id of the character.</param>
+            <returns>The friend names of the character.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IFriendServerContext.Delete(System.String,System.String)">
+            <summary>
+            Deletes the friend with name <paramref name="friendName"/> from the friendlist of <paramref name="characterName"/>.
+            </summary>
+            <param name="characterName">Name of the character holding the friend view item in its friendlist.</param>
+            <param name="friendName">Name of the friend.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IFriendServerContext.GetOpenFriendRequesterNames(System.Guid)">
+            <summary>
+            Gets the names from characters which requested a friendship to the character with the specified id and are not answered yet.
+            </summary>
+            <param name="characterId">Id of the character.</param>
+            <returns>The open friend requester names.</returns>
+        </member>
+        <member name="T:MUnique.OpenMU.Persistence.IGuildServerContext">
+            <summary>
+            A context which is used by the <see cref="T:MUnique.OpenMU.Interfaces.IGuildServer"/>.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IGuildServerContext.GuildWithNameExists(System.String)">
+            <summary>
+            Returns if the guild with the specified name exists.
+            </summary>
+            <param name="name">The name.</param>
+            <returns>True, if the guild with the specified name exists.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IGuildServerContext.GetMemberNames(System.Guid)">
+            <summary>
+            Gets the member names of a guild.
+            </summary>
+            <param name="guildId">The guild identifier.</param>
+            <returns>The member names of a guild.</returns>
+            <remarks>Since names are stored in Character.Name and not duplicated.</remarks>
+        </member>
+        <member name="T:MUnique.OpenMU.Persistence.IPlayerContext">
+            <summary>
+            Persistence context which is used by in-game players.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IPlayerContext.GetLetterBodyByHeaderId(System.Guid)">
+            <summary>
+            Gets the letter body by the id of its header.
+            </summary>
+            <param name="headerId">The id of its header.</param>
+            <returns>The body of the header.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IPlayerContext.GetAccountByLoginName(System.String,System.String)">
+            <summary>
+            Gets the account by login name if the password is correct.
+            </summary>
+            <param name="loginName">The login name.</param>
+            <param name="password">The password.</param>
+            <returns>The account, if the password is correct. Otherwise, null.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IPlayerContext.GetAccountsOrderedByLoginName(System.Int32,System.Int32)">
+            <summary>
+            Gets the accounts ordered by login name.
+            </summary>
+            <param name="skip">The skip count.</param>
+            <param name="count">The count.</param>
+            <returns>The account objects, without depending data.</returns>
+        </member>
+        <member name="T:MUnique.OpenMU.Persistence.IRepository">
+            <summary>
+            A base repository which can return an object by an id.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IRepository.GetById(System.Guid)">
+            <summary>
+            Gets the object by an identifier.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns>The object.</returns>
+        </member>
+        <member name="T:MUnique.OpenMU.Persistence.IRepository`1">
+            <summary>
+            Description of IRepository.
+            </summary>
+            <typeparam name="T">The type which this repository handles.</typeparam>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IRepository`1.GetAll">
+            <summary>
+            Gets all objects.
+            </summary>
+            <returns>All objects of the repository.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IRepository`1.GetById(System.Guid)">
+            <summary>
+            Gets an object by identifier.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns>The object with the identifier.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IRepository`1.Delete(System.Object)">
+            <summary>
+            Deletes the specified object when the unit of work is saved.
+            </summary>
+            <param name="obj">The object.</param>
+            <returns>The success.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IRepository`1.Delete(System.Guid)">
+            <summary>
+            Deletes the object with the specified identifier when the unit of work is saved.
+            </summary>
+            <param name="id">The identifier of the object which should be deleted.</param>
+            <returns>The success.</returns>
+        </member>
+        <member name="T:MUnique.OpenMU.Persistence.IPersistenceContextProvider">
+            <summary>
+            Description of IPersistenceContextProvider.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IPersistenceContextProvider.CreateNewContext">
+            <summary>
+            Creates a new context.
+            </summary>
+            <returns>The newly created context.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IPersistenceContextProvider.CreateNewContext(MUnique.OpenMU.DataModel.Configuration.GameConfiguration)">
+            <summary>
+            Creates a new context.
+            </summary>
+            <param name="gameConfiguration">The game configuration.</param>
+            <returns>
+            The newly created context.
+            </returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IPersistenceContextProvider.CreateNewConfigurationContext">
+            <summary>
+            Creates a new context which should be used to load the configuration.
+            </summary>
+            <returns>
+            The newly created context.
+            </returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IPersistenceContextProvider.CreateNewTradeContext">
+            <summary>
+            Creates the new trade context which is used to exchange items in a trade.
+            </summary>
+            <returns>The newly created context.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IPersistenceContextProvider.CreateNewPlayerContext(MUnique.OpenMU.DataModel.Configuration.GameConfiguration)">
+            <summary>
+            Creates a new context which is used for accounts.
+            This context should only care about the objects of a player;
+            It should not track changes of configuration objects.
+            </summary>
+            <param name="gameConfiguration">The game configuration.</param>
+            <returns>
+            The newly created account context.
+            </returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IPersistenceContextProvider.CreateNewFriendServerContext">
+            <summary>
+            Creates a new context which is used by the friend server.
+            It manages basically only <see cref="T:MUnique.OpenMU.Interfaces.FriendViewItem"/>s.
+            </summary>
+            <returns>A new context which is used by the friend server.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.IPersistenceContextProvider.CreateNewGuildContext">
+            <summary>
+            Creates a new context which is used by the guild server.
+            It manages basically only <see cref="T:MUnique.OpenMU.Interfaces.Guild"/>s and <see cref="T:MUnique.OpenMU.DataModel.Entities.GuildMember"/>s.
+            </summary>
+            <returns>A new context which is used by the guild server.</returns>
+        </member>
+        <member name="T:MUnique.OpenMU.Persistence.RepositoryNotFoundException">
+            <summary>
+            Desctiption of RepositoryNotFoundException.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.RepositoryNotFoundException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.Persistence.RepositoryNotFoundException"/> class.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.RepositoryNotFoundException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.Persistence.RepositoryNotFoundException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.RepositoryNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.Persistence.RepositoryNotFoundException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.RepositoryNotFoundException.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.Persistence.RepositoryNotFoundException"/> class.
+            </summary>
+            <param name="type">The type.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Persistence.RepositoryNotFoundException.#ctor(System.Type,System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.Persistence.RepositoryNotFoundException"/> class.
+            </summary>
+            <param name="type">The type.</param>
+            <param name="specialRepositoryType">Type of the special repository.</param>
+        </member>
+    </members>
+</doc>

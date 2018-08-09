@@ -1,0 +1,675 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MUnique.OpenMU.Pathfinding</name>
+    </assembly>
+    <members>
+        <member name="T:MUnique.OpenMU.Pathfinding.BinaryMinHeap`1">
+            <summary>
+            A binary min heap which implements <see cref="T:MUnique.OpenMU.Pathfinding.IPriorityQueue`1"/>.
+            Objects with the lowest index values appear at the top of the heap, and will be retrieved when calling <see cref="M:MUnique.OpenMU.Pathfinding.BinaryMinHeap`1.Pop"/>.
+            Please note: This class is not thread safe! Push/Pop should not be executed by two different threads at the same time!
+            </summary>
+            <remarks>
+            This class contains some optimizations which do not make the code nicer. However,
+            this data structure is THE bottleneck of the pathfinding algorithm, so optimization is worth it.
+            </remarks>
+            <typeparam name="T">The type which should be contained in the heap.</typeparam>
+        </member>
+        <member name="F:MUnique.OpenMU.Pathfinding.BinaryMinHeap`1.i">
+            <summary>Reused variable to reduce stack allocations.</summary>
+        </member>
+        <member name="F:MUnique.OpenMU.Pathfinding.BinaryMinHeap`1.parentIndex">
+            <summary>Reused variable to reduce stack allocations.</summary>
+        </member>
+        <member name="F:MUnique.OpenMU.Pathfinding.BinaryMinHeap`1.left">
+            <summary>Reused variable to reduce stack allocations.</summary>
+        </member>
+        <member name="F:MUnique.OpenMU.Pathfinding.BinaryMinHeap`1.right">
+            <summary>Reused variable to reduce stack allocations.</summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.BinaryMinHeap`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.Pathfinding.BinaryMinHeap`1"/> class.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.BinaryMinHeap`1.#ctor(System.Collections.Generic.IComparer{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.Pathfinding.BinaryMinHeap`1"/> class.
+            </summary>
+            <param name="comparer">The comparer.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.BinaryMinHeap`1.#ctor(System.Collections.Generic.IComparer{`0},System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.Pathfinding.BinaryMinHeap`1"/> class.
+            </summary>
+            <param name="comparer">The comparer.</param>
+            <param name="capacity">The capacity.</param>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.BinaryMinHeap`1.Count">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.BinaryMinHeap`1.Push(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.BinaryMinHeap`1.Pop">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.BinaryMinHeap`1.Peek">
+            <summary>
+            Get the smallest object without removing it.
+            </summary>
+            <returns>The smallest object</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.BinaryMinHeap`1.Clear">
+            <inheritdoc/>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.EuclideanHeuristic">
+            <summary>
+            A heuristic which takes the maximum distance value between the x-axis or the y-axis.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.EuclideanHeuristic.HeuristicEstimateMultiplier">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.EuclideanHeuristic.CalculateHeuristicDistance(MUnique.OpenMU.Pathfinding.Point,MUnique.OpenMU.Pathfinding.Point)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.GridNetwork">
+            <summary>
+            Network which is built of a two-dimensional grid of nodes where
+            each coordinate has a fixed cost to reach it from any direction.
+            </summary>
+            <seealso cref="T:MUnique.OpenMU.Pathfinding.INetwork" />
+        </member>
+        <member name="F:MUnique.OpenMU.Pathfinding.GridNetwork.UnreachableGridNodeValue">
+            <summary>
+            The grid node value of an unreachable grid coordinate.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.Pathfinding.GridNetwork.grid">
+            <summary>
+            The two-dimensional grid.
+            For each coordinate it contains the cost of travelling to it from a neighbore coordinate.
+            The value of 0 means, that the coordinate is unreachable.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.GridNetwork.#ctor(System.Byte[0:,0:],System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.Pathfinding.GridNetwork"/> class.
+            </summary>
+            <param name="grid">
+                The two-dimensional grid.
+                For each coordinate it contains the cost of travelling to it from a neighbore coordinate.
+                The value of 0 means, that the coordinate is unreachable, <see cref="F:MUnique.OpenMU.Pathfinding.GridNetwork.UnreachableGridNodeValue"/>.
+            </param>
+            <param name="allowDiagonals">if set to <c>true</c> [allow diagonals].</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.GridNetwork.GetNodeAt(MUnique.OpenMU.Pathfinding.Point)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.GridNetwork.GetPossibleNextNodes(MUnique.OpenMU.Pathfinding.Node)">
+            <inheritdoc/>
+            <remarks>
+            Not sure, if the implementation should really filter out nodes based on their status and cost.
+            </remarks>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.GridNetwork.ResetStatus">
+            <inheritdoc/>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.IHeuristic">
+            <summary>
+            Describes a heuristic which detemines a heuristic distance from the current location to the target location.
+            As better the heuristic as faster an optimal path can be found.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.IHeuristic.HeuristicEstimateMultiplier">
+            <summary>
+            Gets or sets the heuristic estimate multiply value.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.IHeuristic.CalculateHeuristicDistance(MUnique.OpenMU.Pathfinding.Point,MUnique.OpenMU.Pathfinding.Point)">
+            <summary>
+            Calculates the heuristic distance from the location to the target.
+            </summary>
+            <param name="location">The location position.</param>
+            <param name="target">The target position.</param>
+            <returns>The heuristic distance from the location to the target.</returns>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.IIndexer`1">
+            <summary>
+            Describes an indexer for a <see cref="T:MUnique.OpenMU.Pathfinding.IndexedLinkedList`1"/>.
+            </summary>
+            <typeparam name="T">The type for which the indexer can calculate the index value.</typeparam>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.IIndexer`1.GetIndexValue(`0)">
+            <summary>
+            Gets the index value of the item.
+            </summary>
+            <param name="item">The item.</param>
+            <returns>The index value.</returns>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.IndexedLinkedList`1">
+            <summary>
+            An indexed linked list which implements <see cref="T:MUnique.OpenMU.Pathfinding.IPriorityQueue`1"/>.
+            Objects with the lowest index values appears at the first place of the list, and will be retrieved when calling <see cref="M:MUnique.OpenMU.Pathfinding.IndexedLinkedList`1.Pop"/>.
+            </summary>
+            <remarks>
+            This list is a bit slower (~ 3x) at the <see cref="M:MUnique.OpenMU.Pathfinding.IndexedLinkedList`1.Push(`0)"/> operation,
+            but a lot faster (10x) at the <see cref="M:MUnique.OpenMU.Pathfinding.IndexedLinkedList`1.Pop"/> operation than
+            the <see cref="T:MUnique.OpenMU.Pathfinding.BinaryMinHeap`1"/>.
+            </remarks>
+            <typeparam name="T">The type which should be contained in the heap.</typeparam>
+        </member>
+        <member name="F:MUnique.OpenMU.Pathfinding.IndexedLinkedList`1.index">
+            <summary>
+            The index helps to find a better starting point to insert new nodes.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.IndexedLinkedList`1.#ctor(System.Collections.Generic.IComparer{`0},MUnique.OpenMU.Pathfinding.IIndexer{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.Pathfinding.IndexedLinkedList`1"/> class.
+            </summary>
+            <param name="comparer">A comparer for the type which should be conained in the heap. It is used to determine the correct position in the heap.</param>
+            <param name="indexer">The indexer, which returns an index value which is used as key.</param>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.IndexedLinkedList`1.Count">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.IndexedLinkedList`1.Push(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.IndexedLinkedList`1.Pop">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.IndexedLinkedList`1.Peek">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.IndexedLinkedList`1.Clear">
+            <inheritdoc/>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.INetwork">
+            <summary>
+            Interface of a network which can be used by the <see cref="T:MUnique.OpenMU.Pathfinding.PathFinder"/>.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.INetwork.GetNodeAt(MUnique.OpenMU.Pathfinding.Point)">
+            <summary>
+            Gets the node at the specified position.
+            </summary>
+            <param name="position">The position.</param>
+            <returns>The node at the specified position.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.INetwork.GetPossibleNextNodes(MUnique.OpenMU.Pathfinding.Node)">
+            <summary>
+            Gets the nodes which can be reached by the specified node.
+            </summary>
+            <param name="node">The node.</param>
+            <returns>The nodes which can be reached by the specified node.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.INetwork.ResetStatus">
+            <summary>
+            Resets the status of all nodes of the network.
+            Needed to be called before any new path is being searched.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.IPathFinder">
+            <summary>
+            Interface for a path finder.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.IPathFinder.FindPath(MUnique.OpenMU.Pathfinding.Point,MUnique.OpenMU.Pathfinding.Point)">
+            <summary>
+            Finds the path between two points.
+            </summary>
+            <param name="start">The start point.</param>
+            <param name="end">The end point.</param>
+            <returns>The path between start and end, including <paramref name="end"/>, but excluding <paramref name="start"/>.</returns>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.IPriorityQueue`1">
+            <summary>
+            Interface for a priority queue.
+            </summary>
+            <typeparam name="T">Type which should be contained in the queue.</typeparam>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.IPriorityQueue`1.Count">
+            <summary>
+            Gets the number of elements in the queue.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.IPriorityQueue`1.Push(`0)">
+            <summary>
+            Pushes the specified item into the queue, and puts them at the right place, based on it's priority.
+            </summary>
+            <param name="item">The item.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.IPriorityQueue`1.Pop">
+            <summary>
+            Retrieves the instance with the highest priority, and removes it from the queue.
+            </summary>
+            <returns>The instance with the highest priority.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.IPriorityQueue`1.Peek">
+            <summary>
+            Retrieves the instance with the highest priority, without removing it from the queue.
+            </summary>
+            <returns>The instance with the highest priority.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.IPriorityQueue`1.Clear">
+            <summary>
+            Clears this instance.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.ManhattanHeuristic">
+            <summary>
+            The manhattan (because of how the buildings are placed) heuristic.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.ManhattanHeuristic.HeuristicEstimateMultiplier">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.ManhattanHeuristic.CalculateHeuristicDistance(MUnique.OpenMU.Pathfinding.Point,MUnique.OpenMU.Pathfinding.Point)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.MaximumDistanceOfXorYHeuristic">
+            <summary>
+            A heuristic which takes the maximum distance value between the x-axis or the y-axis.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.MaximumDistanceOfXorYHeuristic.HeuristicEstimateMultiplier">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.MaximumDistanceOfXorYHeuristic.CalculateHeuristicDistance(MUnique.OpenMU.Pathfinding.Point,MUnique.OpenMU.Pathfinding.Point)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.NodeStatus">
+            <summary>
+            The status of a node.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.Pathfinding.NodeStatus.Undefined">
+            <summary>
+            The status is undefined.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.Pathfinding.NodeStatus.Open">
+            <summary>
+            The node is on the open list.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.Pathfinding.NodeStatus.Closed">
+            <summary>
+            The node is on the closed list.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.Node">
+            <summary>
+            A node of the path network.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.Node.PredictedTotalCost">
+            <summary>
+            Gets or sets the predicted total cost (F) to reach the destination.
+            </summary>
+            <remarks>F = G + H</remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.Node.CostUntilNow">
+            <summary>
+            Gets or sets the cost which came up so far (G) to reach this node.
+            </summary>
+            <remarks>G.</remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.Node.Position">
+            <summary>
+            Gets or sets the position of this node.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.Node.X">
+            <summary>
+            Gets the x coordinate of this node.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.Node.Y">
+            <summary>
+            Gets the y coordinate of this node.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.Node.PreviousNode">
+            <summary>
+            Gets or sets the previous node.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.Node.Status">
+            <summary>
+            Gets or sets the status.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.NodeComparer">
+            <summary>
+            A comparer to sort nodes based on their <see cref="P:MUnique.OpenMU.Pathfinding.Node.PredictedTotalCost"/> value.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.NodeComparer.Compare(MUnique.OpenMU.Pathfinding.Node,MUnique.OpenMU.Pathfinding.Node)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.NodeIndexer">
+            <summary>
+            An indexer for a <see cref="T:MUnique.OpenMU.Pathfinding.Node"/>, which can be used to calculate the index on the binary heap.
+            The index is the predicted total cost to reach the node, divided by 10. So every 10 values,
+            there is one index entry in the <see cref="F:MUnique.OpenMU.Pathfinding.IndexedLinkedList`1.index"/>.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.NodeIndexer.GetIndexValue(MUnique.OpenMU.Pathfinding.Node)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.NoHeuristic">
+            <summary>
+            A heuristic which does not calculate a heuristic distance.
+            </summary>
+            <remarks>Using this equals the Dijkstra algorithm.</remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.NoHeuristic.HeuristicEstimateMultiplier">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.NoHeuristic.CalculateHeuristicDistance(MUnique.OpenMU.Pathfinding.Point,MUnique.OpenMU.Pathfinding.Point)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.PathFinder">
+            <summary>
+            An implementation of the pathfinder which finds paths inside a two-dimensional grid.
+            Please note, that this path finder is not thread safe,
+            so only one search is allowed at the same time on one instance.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.PathFinder.#ctor(MUnique.OpenMU.Pathfinding.INetwork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.Pathfinding.PathFinder"/> class.
+            </summary>
+            <param name="network">The network on which the pathfinder should operate.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.PathFinder.#ctor(MUnique.OpenMU.Pathfinding.INetwork,MUnique.OpenMU.Pathfinding.IPriorityQueue{MUnique.OpenMU.Pathfinding.Node})">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.Pathfinding.PathFinder"/> class.
+            </summary>
+            <param name="network">The network on which the pathfinder should operate.</param>
+            <param name="openList">The open list.</param>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.PathFinder.MaximumDistance">
+            <summary>
+            Gets or sets the maximum distance until which the path should be resolved.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.PathFinder.SearchLimit">
+            <summary>
+            Gets or sets the search limit.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.PathFinder.HeuristicEstimate">
+            <summary>
+            Gets or sets the heuristic estimate.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.PathFinder.Heuristic">
+            <summary>
+            Gets or sets the heuristic.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.PathFinder.FindPath(MUnique.OpenMU.Pathfinding.Point,MUnique.OpenMU.Pathfinding.Point)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.PathFinder.StopPathfinder">
+            <summary>
+            Stops the pathfinder.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.PathResultNode">
+            <summary>
+            A path finder node.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.PathResultNode.#ctor(MUnique.OpenMU.Pathfinding.Point,MUnique.OpenMU.Pathfinding.Point)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.Pathfinding.PathResultNode" /> struct.
+            </summary>
+            <param name="point">The point.</param>
+            <param name="previousPoint">The previous point.</param>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.PathResultNode.PreviousPoint">
+            <summary>
+            Gets the previous point.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.PathResultNode.X">
+            <summary>
+            Gets the x coordinate.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.PathResultNode.Y">
+            <summary>
+            Gets the y coordinate.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.Point">
+            <summary>
+            Defines a coordinate on a map.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.Point.#ctor(System.Byte,System.Byte)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.Pathfinding.Point"/> struct.
+            </summary>
+            <param name="x">The x coordinate.</param>
+            <param name="y">The y coordinate.</param>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.Point.X">
+            <summary>
+            Gets the x coordinate.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.Point.Y">
+            <summary>
+            Gets the y coordinate.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.Point.op_Equality(MUnique.OpenMU.Pathfinding.Point,MUnique.OpenMU.Pathfinding.Point)">
+            <summary>
+            Implements the operator ==.
+            </summary>
+            <param name="point1">The point1.</param>
+            <param name="point2">The point2.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.Point.op_Inequality(MUnique.OpenMU.Pathfinding.Point,MUnique.OpenMU.Pathfinding.Point)">
+            <summary>
+            Implements the operator !=.
+            </summary>
+            <param name="point1">The point1.</param>
+            <param name="point2">The point2.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.Point.EuclideanDistanceTo(MUnique.OpenMU.Pathfinding.Point)">
+            <summary>
+            Gets the euclidean distance between this point and another point.
+            </summary>
+            <param name="otherPoint">The other point.</param>
+            <returns>The distance between this point and another point.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.Point.Equals(MUnique.OpenMU.Pathfinding.Point)">
+            <summary>
+            Equalses the specified other point.
+            </summary>
+            <param name="otherPoint">The other point.</param>
+            <returns>True, if the points are on the same coordinate.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.Point.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.Point.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.Point.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.PreCalculation.CompactPathsSerializer">
+            <summary>
+            Serializes the path infos into a more compact format.
+            This format uses just 1 byte for end and 1 byte for next step.
+            It can only be used for maximumRange lower than 8, because of the space limitation.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.PreCalculation.CompactPathsSerializer.Deserialize(System.IO.Stream)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.PreCalculation.CompactPathsSerializer.Serialize(System.Collections.Generic.IEnumerable{MUnique.OpenMU.Pathfinding.PreCalculation.PathInfo},System.IO.Stream)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.PreCalculation.IPathsSerializer">
+            <summary>
+            Interface for a paths serializer.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.PreCalculation.IPathsSerializer.Deserialize(System.IO.Stream)">
+            <summary>
+            Deserializes the path infos from the specified source.
+            </summary>
+            <param name="source">The source.</param>
+            <returns>The path infos.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.PreCalculation.IPathsSerializer.Serialize(System.Collections.Generic.IEnumerable{MUnique.OpenMU.Pathfinding.PreCalculation.PathInfo},System.IO.Stream)">
+            <summary>
+            Serializes the specified path infos into the stream.
+            </summary>
+            <param name="pathInfos">The path infos.</param>
+            <param name="targetStream">The target stream.</param>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.PreCalculation.NormalPathsSerializer">
+            <summary>
+            Serializes the path infos into the normal format. Every point uses exactly 2 bytes.
+            </summary>
+            <seealso cref="T:MUnique.OpenMU.Pathfinding.PreCalculation.IPathsSerializer" />
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.PreCalculation.NormalPathsSerializer.Deserialize(System.IO.Stream)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.PreCalculation.NormalPathsSerializer.Serialize(System.Collections.Generic.IEnumerable{MUnique.OpenMU.Pathfinding.PreCalculation.PathInfo},System.IO.Stream)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.PreCalculation.PathInfo">
+            <summary>
+            Information about which is the <see cref="P:MUnique.OpenMU.Pathfinding.PreCalculation.PathInfo.NextStep"/> to reach the <see cref="P:MUnique.OpenMU.Pathfinding.PreCalculation.PointCombination.End"/> from the <see cref="P:MUnique.OpenMU.Pathfinding.PreCalculation.PointCombination.Start"/>.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.PreCalculation.PathInfo.#ctor(MUnique.OpenMU.Pathfinding.PreCalculation.PointCombination,MUnique.OpenMU.Pathfinding.Point)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.Pathfinding.PreCalculation.PathInfo"/> struct.
+            </summary>
+            <param name="combination">The combination.</param>
+            <param name="nextStep">The next step.</param>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.PreCalculation.PathInfo.Combination">
+            <summary>
+            Gets the start/end point combination which acts like a key for the next step.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.PreCalculation.PathInfo.NextStep">
+            <summary>
+            Gets the next step to get one step closer to the <see cref="P:MUnique.OpenMU.Pathfinding.PreCalculation.PointCombination.End"/>.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.PreCalculation.PathsSerializeExtensions">
+            <summary>
+            Extension methods for paths serialization.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.PreCalculation.PathsSerializeExtensions.PathInfoFormat">
+            <summary>
+            The format in which the path infos will be serialized.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.Pathfinding.PreCalculation.PathsSerializeExtensions.PathInfoFormat.Compact">
+            <summary>
+            The compact format.
+            This format uses just 1 byte for end and 1 byte for next step.
+            It can only be used for maximumRange lower than 8, because of the space limitation.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.Pathfinding.PreCalculation.PathsSerializeExtensions.PathInfoFormat.Normal">
+            <summary>
+            The normal format. Every point uses exactly 2 bytes.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.PreCalculation.PathsSerializeExtensions.SerializeToStream(System.Collections.Generic.IEnumerable{MUnique.OpenMU.Pathfinding.PreCalculation.PathInfo},System.IO.Stream,MUnique.OpenMU.Pathfinding.PreCalculation.PathsSerializeExtensions.PathInfoFormat)">
+            <summary>
+            Serializes the path infos to the target stream.
+            </summary>
+            <param name="pathInfos">The path infos.</param>
+            <param name="target">The target stream.</param>
+            <param name="format">The format.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.PreCalculation.PathsSerializeExtensions.DeserializeFromStream(System.IO.Stream)">
+            <summary>
+            Deserializes the path infos from the source stream.
+            </summary>
+            <param name="source">The source stream.</param>
+            <returns>The path infos.</returns>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.PreCalculation.PointCombination">
+            <summary>
+            A combination of the start and end point, which acts like a key for the next step to reach the end point.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.PreCalculation.PointCombination.#ctor(MUnique.OpenMU.Pathfinding.Point,MUnique.OpenMU.Pathfinding.Point)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.Pathfinding.PreCalculation.PointCombination"/> struct.
+            </summary>
+            <param name="start">The start point.</param>
+            <param name="end">The end point.</param>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.PreCalculation.PointCombination.Start">
+            <summary>
+            Gets the start point.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.Pathfinding.PreCalculation.PointCombination.End">
+            <summary>
+            Gets the end point.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.PreCalculation.PreCalculatedPathFinder">
+            <summary>
+            Path finder which uses pre calculated paths.
+            </summary>
+            <seealso cref="T:MUnique.OpenMU.Pathfinding.IPathFinder" />
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.PreCalculation.PreCalculatedPathFinder.#ctor(System.Collections.Generic.IEnumerable{MUnique.OpenMU.Pathfinding.PreCalculation.PathInfo})">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.Pathfinding.PreCalculation.PreCalculatedPathFinder"/> class.
+            </summary>
+            <param name="pathInfos">The path infos.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.PreCalculation.PreCalculatedPathFinder.FindPath(MUnique.OpenMU.Pathfinding.Point,MUnique.OpenMU.Pathfinding.Point)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MUnique.OpenMU.Pathfinding.PreCalculation.PreCalculator">
+            <summary>
+            With this class you can pre-calculate all paths of a given map and save it in a compact way.
+            </summary>
+            <remarks>
+            For more information, see http://www.gamedev.net/page/resources/_/technical/artificial-intelligence/precalculated-pathfinding-revisited-r1939.
+            </remarks>
+        </member>
+        <member name="M:MUnique.OpenMU.Pathfinding.PreCalculation.PreCalculator.PreCalcuatePaths(System.Byte[0:,0:],System.Boolean[0:,0:],System.Int32)">
+            <summary>
+            Pres calcuates the paths from every possible point of the <paramref name="aiGrid" /> to any point of the <paramref name="aiGrid" /> in the <paramref name="maximumRange" />.
+            </summary>
+            <param name="aiGrid">The ai grid of the map, which includes the costs of moving to a specific coordinate.</param>
+            <param name="walkMap">The grid of walkable coordinates of the map.</param>
+            <param name="maximumRange">The maximum range.</param>
+            <returns>All calculated path informations.</returns>
+        </member>
+    </members>
+</doc>

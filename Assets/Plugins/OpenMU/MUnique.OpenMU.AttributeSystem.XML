@@ -1,0 +1,563 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MUnique.OpenMU.AttributeSystem</name>
+    </assembly>
+    <members>
+        <member name="T:MUnique.OpenMU.AttributeSystem.AggregateType">
+            <summary>
+            The attribute aggregate type.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.AttributeSystem.AggregateType.AddRaw">
+            <summary>
+            Adds the value to the raw base value.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.AttributeSystem.AggregateType.Multiplicate">
+            <summary>
+            Multiplicates the value.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.AttributeSystem.AggregateType.AddFinal">
+            <summary>
+            Adds the value to the final value.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.AttributeSystem.AttributeDefinition">
+            <summary>
+            Defines and Identifies a Attribute.
+            In the future it may also contain additional data, like a maximum limit of the reachable value to do balancing.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeDefinition.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.AttributeSystem.AttributeDefinition"/> class.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeDefinition.#ctor(System.Guid,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.AttributeSystem.AttributeDefinition"/> class.
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="designation">The designation.</param>
+            <param name="description">The description.</param>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.AttributeDefinition.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.AttributeDefinition.Designation">
+            <summary>
+            Gets or sets the designation.
+            </summary>
+            <value>
+            The designation.
+            </value>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.AttributeDefinition.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>
+            The description.
+            </value>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeDefinition.op_Equality(MUnique.OpenMU.AttributeSystem.AttributeDefinition,MUnique.OpenMU.AttributeSystem.AttributeDefinition)">
+            <summary>
+            Implements the operator ==.
+            </summary>
+            <param name="lhs">The LHS.</param>
+            <param name="rhs">The RHS.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeDefinition.op_Inequality(MUnique.OpenMU.AttributeSystem.AttributeDefinition,MUnique.OpenMU.AttributeSystem.AttributeDefinition)">
+            <summary>
+            Implements the operator !=.
+            </summary>
+            <param name="lhs">The LHS.</param>
+            <param name="rhs">The RHS.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeDefinition.Equals(MUnique.OpenMU.AttributeSystem.AttributeDefinition)">
+            <inheritdoc />
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeDefinition.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeDefinition.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeDefinition.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+            </returns>
+        </member>
+        <member name="T:MUnique.OpenMU.AttributeSystem.InputOperator">
+            <summary>
+            The operator which is applied between the input attribute and the input operand.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.AttributeSystem.InputOperator.Multiply">
+            <summary>
+            The <see cref="P:MUnique.OpenMU.AttributeSystem.AttributeRelationship.InputAttribute"/> is multiplied with the <see cref="P:MUnique.OpenMU.AttributeSystem.AttributeRelationship.InputOperand"/> before adding to the <see cref="P:MUnique.OpenMU.AttributeSystem.AttributeRelationship.TargetAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.AttributeSystem.InputOperator.Add">
+            <summary>
+            The <see cref="P:MUnique.OpenMU.AttributeSystem.AttributeRelationship.InputAttribute"/> is increased by the <see cref="P:MUnique.OpenMU.AttributeSystem.AttributeRelationship.InputOperand"/> before adding to the <see cref="P:MUnique.OpenMU.AttributeSystem.AttributeRelationship.TargetAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.AttributeSystem.InputOperator.Exponentiate">
+            <summary>
+            The <see cref="P:MUnique.OpenMU.AttributeSystem.AttributeRelationship.InputAttribute"/> is exponentiated by the <see cref="P:MUnique.OpenMU.AttributeSystem.AttributeRelationship.InputOperand"/> before adding to the <see cref="P:MUnique.OpenMU.AttributeSystem.AttributeRelationship.TargetAttribute"/>.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.AttributeSystem.AttributeRelationship">
+            <summary>
+            Describes a relationship between two attributes.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeRelationship.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.AttributeSystem.AttributeRelationship"/> class.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeRelationship.#ctor(MUnique.OpenMU.AttributeSystem.AttributeDefinition,System.Single,MUnique.OpenMU.AttributeSystem.AttributeDefinition,MUnique.OpenMU.AttributeSystem.InputOperator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.AttributeSystem.AttributeRelationship" /> class.
+            </summary>
+            <param name="targetAttribute">The target attribute.</param>
+            <param name="inputOperand">The multiplier.</param>
+            <param name="inputAttribute">The input attribute.</param>
+            <param name="inputOperator">The input operator.</param>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.AttributeRelationship.TargetAttribute">
+            <summary>
+            Gets or sets the target attribute which will be affected.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.AttributeRelationship.InputAttribute">
+            <summary>
+            Gets or sets the input attribute which provides the input value.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.AttributeRelationship.InputOperator">
+            <summary>
+            Gets or sets the operator which is applied between the input attribute and the input operand.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.AttributeRelationship.InputOperand">
+            <summary>
+            Gets or sets the operand which is applied to the input attribute before adding to the target attribute.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.AttributeSystem.AttributeRelationshipElement">
+            <summary>
+            An attribute relationship element which takes several input elements which are summed up and multiplied.
+            Calculated values are cached for a better performance.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeRelationshipElement.#ctor(System.Collections.Generic.IEnumerable{MUnique.OpenMU.AttributeSystem.IElement},System.Single,MUnique.OpenMU.AttributeSystem.InputOperator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.AttributeSystem.AttributeRelationshipElement" /> class.
+            </summary>
+            <param name="inputElements">The input elements which are summed up.</param>
+            <param name="inputOperand">The operand which is applied to the summed up input elements.</param>
+            <param name="inputOperator">The input operator.</param>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.AttributeRelationshipElement.InputElements">
+            <summary>
+            Gets the input elements.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.AttributeRelationshipElement.InputOperand">
+            <summary>
+            Gets or sets the multiplier with which the sum of all input element values are multiplied.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.AttributeRelationshipElement.InputOperator">
+            <summary>
+            Gets or sets the input operator.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.AttributeRelationshipElement.Value">
+            <summary>
+            Gets the calculated value.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.AttributeSystem.AttributeSystem">
+            <summary>
+            The attribute system which holds all attributes of a character.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeSystem.#ctor(System.Collections.Generic.IEnumerable{MUnique.OpenMU.AttributeSystem.IAttribute},System.Collections.Generic.IEnumerable{MUnique.OpenMU.AttributeSystem.IAttribute},System.Collections.Generic.IEnumerable{MUnique.OpenMU.AttributeSystem.AttributeRelationship})">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.AttributeSystem.AttributeSystem" /> class.
+            </summary>
+            <param name="statAttributes">The stat attributes. These attributes are added just as-is and are not wrapped by a <see cref="T:MUnique.OpenMU.AttributeSystem.ComposableAttribute"/>.</param>
+            <param name="baseAttributes">The initial base attributes. These attributes contain the base values which will be wrapped by a <see cref="T:MUnique.OpenMU.AttributeSystem.ComposableAttribute"/>, so additional elements can contribute to the attributes value. Instead of providing them here, you could also add them to the system by calling <see cref="M:MUnique.OpenMU.AttributeSystem.AttributeSystem.AddElement(MUnique.OpenMU.AttributeSystem.IElement,MUnique.OpenMU.AttributeSystem.AttributeDefinition)"/> later.</param>
+            <param name="attributeRelationships">The inital attribute relationships. Instead of providing them here, you could also add them to the system by calling <see cref="M:MUnique.OpenMU.AttributeSystem.AttributeSystem.AddAttributeRelationship(MUnique.OpenMU.AttributeSystem.AttributeRelationship,MUnique.OpenMU.AttributeSystem.IAttributeSystem)"/> later.</param>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.AttributeSystem.Item(MUnique.OpenMU.AttributeSystem.AttributeDefinition)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeSystem.AddAttributeRelationship(MUnique.OpenMU.AttributeSystem.AttributeRelationship,MUnique.OpenMU.AttributeSystem.IAttributeSystem)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeSystem.CreateRelatedAttribute(MUnique.OpenMU.AttributeSystem.AttributeRelationship,MUnique.OpenMU.AttributeSystem.IAttributeSystem)">
+            <summary>
+            Creates the related attribute.
+            </summary>
+            <param name="relationship">The relationship.</param>
+            <param name="sourceAttributeHolder">The source attribute holder. May be the attribute system of another player.</param>
+            <returns>The newly created relationship element.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeSystem.SetStatAttribute(MUnique.OpenMU.AttributeSystem.AttributeDefinition,System.Single)">
+            <summary>
+            Sets the stat attribute, if the <paramref name="attributeDefinition"/> is a stat attribute.
+            </summary>
+            <param name="attributeDefinition">The attribute definition.</param>
+            <param name="newValue">The new value.</param>
+            <returns>The success.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeSystem.GetComposableAttribute(MUnique.OpenMU.AttributeSystem.AttributeDefinition)">
+            <summary>
+            Gets the composable attribute.
+            </summary>
+            <param name="attributeDefinition">The attribute definition.</param>
+            <returns>The composable attribute.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeSystem.GetValueOfAttribute(MUnique.OpenMU.AttributeSystem.AttributeDefinition)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeSystem.AddElement(MUnique.OpenMU.AttributeSystem.IElement,MUnique.OpenMU.AttributeSystem.AttributeDefinition)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeSystem.RemoveElement(MUnique.OpenMU.AttributeSystem.IElement,MUnique.OpenMU.AttributeSystem.AttributeDefinition)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeSystem.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeSystem.GetOrCreateAttribute(MUnique.OpenMU.AttributeSystem.AttributeDefinition)">
+            <summary>
+            Gets or creates the element with the specified attribute.
+            </summary>
+            <param name="attributeDefinition">The attribute definition.</param>
+            <returns>The element of the attribute.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.AttributeSystem.AddAttributeRelationship(MUnique.OpenMU.AttributeSystem.AttributeRelationship)">
+            <summary>
+            Adds the attribute relationship.
+            </summary>
+            <param name="combination">The combination.</param>
+        </member>
+        <member name="T:MUnique.OpenMU.AttributeSystem.BaseAttribute">
+            <summary>
+            The base class for an attribute.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.BaseAttribute.#ctor(MUnique.OpenMU.AttributeSystem.AttributeDefinition,MUnique.OpenMU.AttributeSystem.AggregateType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.AttributeSystem.BaseAttribute"/> class.
+            </summary>
+            <param name="definition">The definition.</param>
+            <param name="aggregateType">Type of the aggregate.</param>
+        </member>
+        <member name="E:MUnique.OpenMU.AttributeSystem.BaseAttribute.ValueChanged">
+            <inheritdoc/>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.BaseAttribute.Definition">
+            <inheritdoc/>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.BaseAttribute.Value">
+            <inheritdoc/>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.BaseAttribute.AggregateType">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.BaseAttribute.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.BaseAttribute.RaiseValueChanged">
+            <summary>
+            Raises the value changed event.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.AttributeSystem.BaseStatAttribute">
+            <summary>
+            An attribute which represents an increasable stat attribute (e.g. by level-up points).
+            </summary>
+            <remarks>
+            Intermediate class, needed because we want to add a setter.
+            We do just override the getter here and have to introduce a new Value get/set-property on a derived type.
+            </remarks>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.BaseStatAttribute.#ctor(MUnique.OpenMU.AttributeSystem.AttributeDefinition,MUnique.OpenMU.AttributeSystem.AggregateType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.AttributeSystem.BaseStatAttribute"/> class.
+            </summary>
+            <param name="definition">The definition.</param>
+            <param name="aggregateType">Type of the aggregate.</param>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.BaseStatAttribute.Value">
+            <inheritdoc/>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.BaseStatAttribute.ValueGetter">
+            <summary>
+            Gets the value.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.AttributeSystem.ComposableAttribute">
+            <summary>
+            An attribute which is a composition of elements.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.ComposableAttribute.#ctor(MUnique.OpenMU.AttributeSystem.AttributeDefinition)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.AttributeSystem.ComposableAttribute"/> class.
+            </summary>
+            <param name="definition">The definition.</param>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.ComposableAttribute.Elements">
+            <inheritdoc/>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.ComposableAttribute.Value">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.ComposableAttribute.AddElement(MUnique.OpenMU.AttributeSystem.IElement)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.ComposableAttribute.RemoveElement(MUnique.OpenMU.AttributeSystem.IElement)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MUnique.OpenMU.AttributeSystem.ConstantElement">
+            <summary>
+            An element with a constant value.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.ConstantElement.#ctor(System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.AttributeSystem.ConstantElement"/> class.
+            </summary>
+            <param name="value">The constant value.</param>
+        </member>
+        <member name="E:MUnique.OpenMU.AttributeSystem.ConstantElement.ValueChanged">
+            <summary>
+            Never occurs, so the implementation is empty.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.ConstantElement.Value">
+            <inheritdoc/>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.ConstantElement.AggregateType">
+            <inheritdoc/>
+        </member>
+        <member name="T:MUnique.OpenMU.AttributeSystem.ConstValueAttribute">
+            <summary>
+            An attribute with a constant value.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.ConstValueAttribute.#ctor(System.Single,MUnique.OpenMU.AttributeSystem.AttributeDefinition)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.AttributeSystem.ConstValueAttribute" /> class.
+            </summary>
+            <param name="value">The value.</param>
+            <param name="definition">The definition.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.ConstValueAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.AttributeSystem.ConstValueAttribute"/> class.
+            </summary>
+        </member>
+        <member name="E:MUnique.OpenMU.AttributeSystem.ConstValueAttribute.ValueChanged">
+            <inheritdoc/>
+            <remarks>Empty implementation, because the value can't change.</remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.ConstValueAttribute.Definition">
+            <inheritdoc/>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.ConstValueAttribute.Value">
+            <inheritdoc/>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.ConstValueAttribute.AggregateType">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.ConstValueAttribute.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:MUnique.OpenMU.AttributeSystem.IAttribute">
+            <summary>
+            The interface of an attribute.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.IAttribute.Definition">
+            <summary>
+            Gets the attribute definition.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.AttributeSystem.IAttributeSystem">
+            <summary>
+            An attribute system which holds all attributes of a game object.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.IAttributeSystem.Item(MUnique.OpenMU.AttributeSystem.AttributeDefinition)">
+            <summary>
+            Gets or sets the value with the specified attribute definition.
+            </summary>
+            <param name="attributeDefinition">The attribute definition.</param>
+            <returns>The value of the specified attribute.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.IAttributeSystem.GetValueOfAttribute(MUnique.OpenMU.AttributeSystem.AttributeDefinition)">
+            <summary>
+            Gets the value of the attribute.
+            </summary>
+            <param name="attributeDefinition">The attribute definition.</param>
+            <returns>The value of the attribute.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.IAttributeSystem.AddElement(MUnique.OpenMU.AttributeSystem.IElement,MUnique.OpenMU.AttributeSystem.AttributeDefinition)">
+            <summary>
+            Adds the element.
+            </summary>
+            <param name="element">The element.</param>
+            <param name="targetAttribute">The target attribute.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.IAttributeSystem.RemoveElement(MUnique.OpenMU.AttributeSystem.IElement,MUnique.OpenMU.AttributeSystem.AttributeDefinition)">
+            <summary>
+            Removes the element.
+            </summary>
+            <param name="element">The element.</param>
+            <param name="targetAttribute">The target attribute.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.IAttributeSystem.AddAttributeRelationship(MUnique.OpenMU.AttributeSystem.AttributeRelationship,MUnique.OpenMU.AttributeSystem.IAttributeSystem)">
+            <summary>
+            Adds the attribute relationship.
+            </summary>
+            <param name="relationship">The relationship.</param>
+            <param name="sourceAttributeHolder">The source attribute holder. May be the attribute system of another player.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.IAttributeSystem.GetOrCreateAttribute(MUnique.OpenMU.AttributeSystem.AttributeDefinition)">
+            <summary>
+            Gets or creates the element with the specified attribute.
+            </summary>
+            <param name="attributeDefinition">The attribute definition.</param>
+            <returns>The element of the attribute.</returns>
+        </member>
+        <member name="T:MUnique.OpenMU.AttributeSystem.IComposableAttribute">
+            <summary>
+            The Attribute... Hint: every attribute could be wrapped into an element to chain them.
+            Example: We have a base strength attribute which could be wrapped into an element,
+                     and this element could be added to a total strength attribute, which will
+                     also contain the elements gotten from master tree or ancient items.
+                     This way we could identify the base stats, which are needed for the character stats packet.
+                     Another use could define an aggregate function (either addition or multiplication), and again
+                     we could chain this calculations together (keeping commutative property).
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.IComposableAttribute.Elements">
+            <summary>
+            Gets the elements, of which this attribute is calculated.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.IComposableAttribute.AddElement(MUnique.OpenMU.AttributeSystem.IElement)">
+            <summary>
+            Adds the element to the composition.
+            </summary>
+            <param name="element">The element.</param>
+            <returns>The composable attribute itself, to be able to chain adding.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.IComposableAttribute.RemoveElement(MUnique.OpenMU.AttributeSystem.IElement)">
+            <summary>
+            Removes the element from the composition.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="T:MUnique.OpenMU.AttributeSystem.IElement">
+            <summary>
+            The interface of an element.
+            </summary>
+        </member>
+        <member name="E:MUnique.OpenMU.AttributeSystem.IElement.ValueChanged">
+            <summary>
+            Occurs when the value has been changed.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.IElement.Value">
+            <summary>
+            Gets the value.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.IElement.AggregateType">
+            <summary>
+            Gets the type of the aggregate.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.AttributeSystem.SimpleElement">
+            <summary>
+            A simple element with a variable value.
+            </summary>
+        </member>
+        <member name="E:MUnique.OpenMU.AttributeSystem.SimpleElement.ValueChanged">
+            <inheritdoc/>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.SimpleElement.Value">
+            <inheritdoc/>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.SimpleElement.AggregateType">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.SimpleElement.RaiseValueChanged">
+            <summary>
+            Raises the value changed event.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.AttributeSystem.StatAttribute">
+            <summary>
+            An attribute which represents an increasable stat attribute (e.g. by level-up points).
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.StatAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.AttributeSystem.StatAttribute"/> class.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.AttributeSystem.StatAttribute.#ctor(MUnique.OpenMU.AttributeSystem.AttributeDefinition,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.AttributeSystem.StatAttribute"/> class.
+            </summary>
+            <param name="definition">The definition.</param>
+            <param name="baseValue">The base value.</param>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.StatAttribute.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="P:MUnique.OpenMU.AttributeSystem.StatAttribute.ValueGetter">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,2635 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MUnique.OpenMU.DataModel</name>
+    </assembly>
+    <members>
+        <member name="T:MUnique.OpenMU.DataModel.Attributes.PowerUpDefinition">
+            <summary>
+            The power up definition which describes the boost of an target attribute.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Attributes.PowerUpDefinition.TargetAttribute">
+            <summary>
+            Gets or sets the target attribute.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Attributes.PowerUpDefinition.Boost">
+            <summary>
+            Gets or sets the boost.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Attributes.PowerUpDefinition.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Attributes.PowerUpDefinitionValue">
+            <summary>
+            The power up definition value which can consist of a constant value and several related values which are all added together to get the result.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Attributes.PowerUpDefinitionValue.ConstantValue">
+            <summary>
+            Gets or sets the constant value part of the value.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Attributes.PowerUpDefinitionValue.RelatedValues">
+            <summary>
+            Gets or sets the related values.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Attributes.PowerUpDefinitionWithDuration">
+            <summary>
+            A power up definition which got a duration.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Attributes.PowerUpDefinitionWithDuration.Duration">
+            <summary>
+            Gets or sets the duration which describes how long the boost applies.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.Direction">
+            <summary>
+            Direction where an object is looking at.
+            </summary>
+            <remarks>
+            Direction Matrix (P = Player), similar to how it's shown in the web live map:
+                Y | - | y | +
+              X   |   |   |
+            -------------------
+              -   | 4 | 5 | 6
+              x   | 3 | P | 7
+              +   | 2 | 1 | 8
+            </remarks>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.Direction.Undefined">
+            <summary>
+            The undefined direction.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.Direction.South">
+            <summary>
+            The direction looking to the south.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.Direction.SouthWest">
+            <summary>
+            The direction looking to the south east.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.Direction.West">
+            <summary>
+            The direction looking to the east.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.Direction.NorthWest">
+            <summary>
+            The direction looking to the north east.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.Direction.North">
+            <summary>
+            The direction looking to the north.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.Direction.NorthEast">
+            <summary>
+            The direction looking to the north west.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.Direction.East">
+            <summary>
+            The direction looking to the west.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.Direction.SouthEast">
+            <summary>
+            The direction looking to the south west.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.EnterGate">
+            <summary>
+            Defines a gate which a player can enter to move to another <see cref="T:MUnique.OpenMU.DataModel.Configuration.ExitGate"/>.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.EnterGate.TargetGate">
+            <summary>
+            Gets or sets the target gate.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.EnterGate.LevelRequirement">
+            <summary>
+            Gets or sets the level requirement which the player needs to move through the gate.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.EnterGate.Number">
+            <summary>
+            Gets or sets the number of the gate.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.ExitGate">
+            <summary>
+            Defines a gate through which a player enters a map.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ExitGate.Direction">
+            <summary>
+            Gets or sets the direction to which the player looks when he enters the map.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ExitGate.Map">
+            <summary>
+            Gets or sets the map which will be entered.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ExitGate.IsSpawnGate">
+            <summary>
+            Gets or sets a value indicating whether this instance is a spawn gate.
+            If it's not a spawn gate, it's a target of an <see cref="T:MUnique.OpenMU.DataModel.Configuration.EnterGate"/>.
+            </summary>
+            <value>
+              <c>true</c> if this instance is spawn gate; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.GameConfiguration">
+            <summary>
+            Defines the game configuration.
+            A game configuration contains the whole configuration of a game, directly or indirectly.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.MaximumLevel">
+            <summary>
+            Gets or sets the maximum reachable level.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.InfoRange">
+            <summary>
+            Gets or sets the information range. This defines how far players can see other game objects.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.AreaSkillHitsPlayer">
+            <summary>
+            Gets or sets a value indicating whether area skills hit players.
+            </summary>
+            <remarks>
+            Usually false, during castle siege this might be true.
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.MaximumInventoryMoney">
+            <summary>
+            Gets or sets the maximum inventory money value.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.ExperienceTable">
+            <summary>
+            Gets or sets the experience table. Index is the player level, value the needed experience to reach that level.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.MasterExperienceTable">
+            <summary>
+            Gets or sets the master experience table. Index is the player level, value the needed experience to reach that level.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.RecoveryInterval">
+            <summary>
+            Gets or sets the interval for attribute recoveries. See also MUnique.OpenMU.GameLogic.Attributes.Stats.Regeneration.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.MaximumLetters">
+            <summary>
+            Gets or sets the maximum numbers of letters a player can have in his inbox.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.MaximumCharactersPerAccount">
+            <summary>
+            Gets or sets the maximum number of characters per account.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.CharacterNameRegex">
+            <summary>
+            Gets or sets the character name regex.
+            </summary>
+            <remarks>
+            "^[a-zA-Z0-9]{3,10}$";
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.MaximumPasswordLength">
+            <summary>
+            Gets or sets the maximum length of the password.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.MaximumPartySize">
+            <summary>
+            Gets or sets the maximum size of parties.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.JewelMixes">
+            <summary>
+            Gets or sets the possible jewel mixes.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.WarpList">
+            <summary>
+            Gets or sets the warp list.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.BaseDropItemGroups">
+            <summary>
+            Gets or sets the base drop item groups which are valid for the whole game.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.Skills">
+            <summary>
+            Gets or sets the skills of this game configuration.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.CharacterClasses">
+            <summary>
+            Gets or sets the character classes.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.Items">
+            <summary>
+            Gets or sets the item definitions.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.ItemSlotTypes">
+            <summary>
+            Gets or sets the item slot types.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.ItemOptions">
+            <summary>
+            Gets or sets the item option definitions.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.ItemOptionTypes">
+            <summary>
+            Gets or sets the item option types.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.ItemSetGroups">
+            <summary>
+            Gets or sets the item set groups.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.Maps">
+            <summary>
+            Gets or sets the map definitions.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.Monsters">
+            <summary>
+            Gets or sets the monster definitions.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.Attributes">
+            <summary>
+            Gets or sets the attributes.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.MagicEffects">
+            <summary>
+            Gets or sets the magic effects.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameConfiguration.MasterSkillRoots">
+            <summary>
+            Gets or sets the master skill roots.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.GameServerDefinition">
+            <summary>
+            Defines the configuration of a game server.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameServerDefinition.ServerID">
+            <summary>
+            Gets or sets the server identifier.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameServerDefinition.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameServerDefinition.NetworkPort">
+            <summary>
+            Gets or sets the network port on which the server is listening.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameServerDefinition.ServerConfiguration">
+            <summary>
+            Gets or sets the server configuration.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameServerDefinition.GameConfiguration">
+            <summary>
+            Gets or sets the game configuration.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Configuration.GameServerDefinition.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.GameServerConfiguration">
+            <summary>
+            Defines the game server configuration.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameServerConfiguration.SupportedPacketHandlers">
+            <summary>
+            Gets or sets the supported packet handlers, for each version.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameServerConfiguration.MaximumNPCs">
+            <summary>
+            Gets or sets the maximum npc count.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameServerConfiguration.MaximumPlayers">
+            <summary>
+            Gets or sets the maximum number of players which can connect.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameServerConfiguration.Maps">
+            <summary>
+            Gets or sets the maps which should be hosted on the server.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.Gate">
+            <summary>
+            Defines a gate through which a player can exit or enter to other maps.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Gate.X1">
+            <summary>
+            Gets or sets the upper left corner, x-coordinate.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Gate.Y1">
+            <summary>
+            Gets or sets the upper left corner, y-coordinate.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Gate.X2">
+            <summary>
+            Gets or sets the bottom right corner, x-coordinate.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Gate.Y2">
+            <summary>
+            Gets or sets the bottom right corner, y-coordinate.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.SpecialItemType">
+            <summary>
+            Enumeration of special item types.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.SpecialItemType.None">
+            <summary>
+            No special item type.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.SpecialItemType.Ancient">
+            <summary>
+            The ancient special item type.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.SpecialItemType.Excellent">
+            <summary>
+            The excellent special item type.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.SpecialItemType.RandomItem">
+            <summary>
+            The random item special item type.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.SpecialItemType.SocketItem">
+            <summary>
+            The socket item special item type.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.SpecialItemType.Money">
+            <summary>
+            The money special item type.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.DropItemGroup">
+            <summary>
+            Idea: append several "drop item groups" with its certain probability.
+            In the drop generator sort all DropItemGroups by its chance.
+            Classes which can have DropItemGroups: Maps, Monsters(for example the kundun drops), Players(for quest items)
+            The game server configuration also got the basic drop groups (for example for random items and jewels).
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.DropItemGroup.Chance">
+            <summary>
+            Gets or sets the chance of the item drop group to apply. From 0.0 to 1.0.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.DropItemGroup.ItemType">
+            <summary>
+            Gets or sets the special type of the item.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.DropItemGroup.PossibleItems">
+            <summary>
+            Gets or sets the possible items which can be dropped.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ItemCraftingRequiredItem">
+            <summary>
+            Describes an required item for a crafting.
+            TODO: Some properties are not used yet.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ItemCraftingRequiredItem.ItemDefinition">
+            <summary>
+            Gets or sets the item definition.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ItemCraftingRequiredItem.MinLvl">
+            <summary>
+            Gets or sets the minimum level.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ItemCraftingRequiredItem.RequiredItemOptions">
+            <summary>
+            Gets or sets the required item options.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ItemCraftingRequiredItem.MinAmount">
+            <summary>
+            Gets or sets the minimum amount.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ItemCraftingRequiredItem.SuccessResult">
+            <summary>
+            Gets or sets the success result.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ItemCraftingRequiredItem.FailResult">
+            <summary>
+            Gets or sets the fail result.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ItemCraftingRequiredItem.NPCPriceDiv">
+            <summary>
+            Gets or sets the NPC price divisor. For each full division, the percentage gets increased by 1 percent, and the mix price rises.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ItemCraftingRequiredItem.AddPercentage">
+            <summary>
+            Gets or sets the add percentage per division.
+            </summary>
+            <value>
+            The add percentage.
+            </value>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ItemCraftingRequiredItem.RefID">
+            <summary>
+            Gets or sets the reference identifier.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ItemCraftingResultItem">
+            <summary>
+            Defines the resulting item of a crafting.
+            TODO: Some properties are not used yet.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ItemCraftingResultItem.ItemDefinition">
+            <summary>
+            Gets or sets the item definition.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ItemCraftingResultItem.RandLvlMin">
+            <summary>
+            Gets or sets the random minimum level.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ItemCraftingResultItem.RandLvlMax">
+            <summary>
+            Gets or sets the random maximum level.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ItemCraftingResultItem.RefID">
+            <summary>
+            Gets or sets the reference identifier.
+            </summary>
+            <remarks>
+            For Item Upping.
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ItemCraftingResultItem.AddLevel">
+            <summary>
+            Gets or sets the add level.
+            </summary>
+            <remarks>
+            For Item Upping.
+            </remarks>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ItemCrafting">
+            <summary>
+            Description of IItemCrafting.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ItemCrafting.Number">
+            <summary>
+            Gets or sets the number.
+            </summary>
+            <remarks>
+            Referenced by the client with this number.
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ItemCrafting.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ItemCrafting.ItemCraftingHandlerClassName">
+            <summary>
+            Gets or sets the name of the item crafting handler class.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ItemCrafting.SimpleCraftingSettings">
+            <summary>
+            Gets or sets the simple crafting settings.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.SimpleCraftingSettings">
+            <summary>
+            Crafting settings for the simple item crafting handler.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.SimpleCraftingSettings.Money">
+            <summary>
+            Gets or sets the price to do the crafting.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.SimpleCraftingSettings.SuccessPercent">
+            <summary>
+            Gets or sets the success percent.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.SimpleCraftingSettings.MultipleAllowed">
+            <summary>
+            Gets or sets a value indicating whether multiple crafting at the same time are allowed for this crafting.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.SimpleCraftingSettings.RequiredItems">
+            <summary>
+            Gets or sets the required items.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.SimpleCraftingSettings.ResultItems">
+            <summary>
+            Gets or sets the result items, which are generated when the crafting succeeded.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.SimpleCraftingSettings.ResultItemSelect">
+            <summary>
+            Gets or sets the result item selection.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.SimpleCraftingSettings.LuckOptionChance">
+            <summary>
+            Gets or sets the luck option chance.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.SimpleCraftingSettings.SkillOptionChance">
+            <summary>
+            Gets or sets the skill option chance.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.SimpleCraftingSettings.ExcOptionChance">
+            <summary>
+            Gets or sets the excellent option chance.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.SimpleCraftingSettings.MaxExcOptions">
+            <summary>
+            Gets or sets the maximum excellent options.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.MixResult">
+            <summary>
+            Defines what should happen with the required input items when the item crafting finished.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.MixResult.Disappear">
+            <summary>
+            The item will disappear.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.MixResult.StaysAsIs">
+            <summary>
+            The item will stay as is.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.MixResult.DowngradedTo0">
+            <summary>
+            The item will be downgraded to level 0.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.MixResult.DowngradedRandom">
+            <summary>
+            The item will be downgraded to a random level.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ResultItemSelection">
+            <summary>
+            Defines the result item selection.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ResultItemSelection.Any">
+            <summary>
+            One random item is selected as result from the result items.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.ItemCrafting.ResultItemSelection.All">
+            <summary>
+            All items are selected as result from the result items.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.Items.AttributeRequirement">
+            <summary>
+            Defines a requirement of an attribute with the specified value.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.AttributeRequirement.Attribute">
+            <summary>
+            Gets or sets the attribute which is required.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.AttributeRequirement.MinimumValue">
+            <summary>
+            Gets or sets the minimum value the attribute needs to have.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.Items.LevelType">
+            <summary>
+            Defines by which "level" the option is increased with <see cref="P:MUnique.OpenMU.DataModel.Configuration.Items.IncreasableItemOption.LevelDependentOptions"/>.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.Items.LevelType.OptionLevel">
+            <summary>
+            It's increased by the option level.
+            </summary>
+            <remarks>
+            This one is used by item options which can be increased by separate jewels, e.g. Jewel of Life or Jewel of Harmony.
+            </remarks>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.Items.LevelType.ItemLevel">
+            <summary>
+            It's increased by the level of the item which has the option.
+            </summary>
+            <remarks>
+            As far as I know, this is only required for wing options, e.g. 'Increase max HP +50~115'. That's why <see cref="F:MUnique.OpenMU.DataModel.Configuration.Items.LevelType.OptionLevel"/> is the default, too.
+            </remarks>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.Items.IncreasableItemOption">
+            <summary>
+            Defines an item option which can be increased.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.IncreasableItemOption.LevelType">
+            <summary>
+            Gets or sets a value which defines by which "level" the option is increased with <see cref="P:MUnique.OpenMU.DataModel.Configuration.Items.IncreasableItemOption.LevelDependentOptions"/>.
+            </summary>
+            <value>
+            The type of the level.
+            </value>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.IncreasableItemOption.LevelDependentOptions">
+            <summary>
+            Gets or sets the level dependent options for option levels over 1.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.Items.ItemBasePowerUpDefinition">
+            <summary>
+            Defines an item base power up definition.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemBasePowerUpDefinition.TargetAttribute">
+            <summary>
+            Gets or sets the target attribute.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemBasePowerUpDefinition.BaseValueElement">
+            <summary>
+            Gets or sets the base value.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemBasePowerUpDefinition.BonusPerLevel">
+            <summary>
+            Gets or sets the bonus per level.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemBasePowerUpDefinition.BaseValue">
+            <summary>
+            Gets or sets the additional value to the base value.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.Items.ItemDefinition">
+            <summary>
+            Defines an item.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemDefinition.Number">
+            <summary>
+            Gets or sets the (Sub-)Id of this item. Must be unique in an item group.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemDefinition.ItemSlot">
+            <summary>
+            Gets or sets the item slot where it can get equipped.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemDefinition.Width">
+            <summary>
+            Gets or sets the width of the Item.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemDefinition.Height">
+            <summary>
+            Gets or sets the weight of the Item.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemDefinition.DropsFromMonsters">
+            <summary>
+            Gets or sets a value indicating whether the item can be dropped by monsters.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemDefinition.Name">
+            <summary>
+            Gets or sets the name of the item.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemDefinition.DropLevel">
+            <summary>
+            Gets or sets the item drop level, which indicates the minimum monster lvl of which this item can be dropped
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemDefinition.Durability">
+            <summary>
+            Gets or sets the maximum durability of this item at Level 0.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemDefinition.Group">
+            <summary>
+            Gets or sets the item Group (0-15). TODO: Might change item groups to classes, and replace this by it.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemDefinition.Value">
+            <summary>
+            Gets or sets the value which defines the worth of an item in zen currency.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemDefinition.ConsumeHandlerClass">
+            <summary>
+            Gets or sets the class name of the consumer handler.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemDefinition.MaximumSockets">
+            <summary>
+            Gets or sets the maximum number of sockets an instance of this item can have.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemDefinition.Skill">
+            <summary>
+            Gets or sets the skill which this items adds to the skill list while wearing or which can be learned by consuming this item.
+            TODO: Split these two usages into different properties?
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemDefinition.QualifiedCharacters">
+            <summary>
+            Gets or sets the character classes which are qualified to wear this Item.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemDefinition.PossibleItemSetGroups">
+            <summary>
+            Gets or sets the possible item set groups.
+            </summary>
+            <remarks>
+            With this we can define a lot of things, for example:
+              - double wear bonus of single swords
+              - set bonus for defense rate
+              - set bonus for defense, if level is greater than 9
+              - ancient sets
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemDefinition.PossibleItemOptions">
+            <summary>
+            Gets or sets the possible item options.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemDefinition.Requirements">
+            <summary>
+            Gets or sets the requirements for wearing this item.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemDefinition.BasePowerUpAttributes">
+            <summary>
+            Gets or sets the base PowerUps of this item, for example min/max damage for weapons.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.Items.ItemOfItemSet">
+            <summary>
+            Defines additional bonus options for this item of a set.
+            </summary>
+            <remarks>
+            Here we can define additional bonus options, like the ancient options (e.g. +5 / +10 Str etc.).
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOfItemSet.ItemDefinition">
+            <summary>
+            Gets or sets the item's definition for which the bonus should apply.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOfItemSet.BonusOption">
+            <summary>
+            Gets or sets the bonus option.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.Items.ItemOption">
+            <summary>
+            Defines the option of an item.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOption.Number">
+            <summary>
+            Gets or sets the number.
+            </summary>
+            <remarks>
+            This number in combination with the option type is a reference for the client.
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOption.OptionType">
+            <summary>
+            Gets or sets the type of the option.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOption.PowerUpDefinition">
+            <summary>
+            Gets or sets the power up definition which should apply when this item is carried.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionDefinition">
+            <summary>
+            The definition of an item option.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionDefinition.Name">
+            <summary>
+            Gets or sets the name of the option, for example "Luck", "Skill", "Normal Option"
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionDefinition.AddsRandomly">
+            <summary>
+            Gets or sets a value indicating whether this option adds randomly.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionDefinition.AddChance">
+            <summary>
+            Gets or sets the add chance if this option adds randomly.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionDefinition.MaximumOptionsPerItem">
+            <summary>
+            Gets or sets the maximum options per item when it adds randomly by drop.
+            </summary>
+            <remarks>
+            Usually this is 1. But for some options (e.g. excellent) this can be bigger than 1.
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionDefinition.PossibleOptions">
+            <summary>
+            Gets or sets the possible options.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionOfLevel">
+            <summary>
+            The item option, depending on the specified item level.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionOfLevel.Level">
+            <summary>
+            Gets or sets the level.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionOfLevel.RequiredItemLevel">
+            <summary>
+            Gets or sets the required item level.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionOfLevel.PowerUpDefinition">
+            <summary>
+            Gets or sets the power up definition.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionType">
+            <summary>
+            Type of an item option.
+            </summary>
+            <remarks>For example excellent, option, socket, luck.</remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionType.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionType.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionType.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionType.IsVisible">
+            <summary>
+            Gets or sets a value indicating whether this item option is visible to other players.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionType.op_Equality(MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionType,MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionType)">
+            <summary>
+            Implements the operator ==.
+            </summary>
+            <param name="lhs">The LHS.</param>
+            <param name="rhs">The RHS.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionType.op_Inequality(MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionType,MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionType)">
+            <summary>
+            Implements the operator !=.
+            </summary>
+            <param name="lhs">The LHS.</param>
+            <param name="rhs">The RHS.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionType.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionType.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionType.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+            </returns>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionTypes">
+            <summary>
+            Some standard option types.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionTypes.Excellent">
+            <summary>
+            Gets the excellent item option type.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionTypes.Wing">
+            <summary>
+            Gets the wing option type.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionTypes.Luck">
+            <summary>
+            Gets the luck option type.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionTypes.Option">
+            <summary>
+            Gets the standard option option type.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionTypes.HarmonyOption">
+            <summary>
+            Gets the harmony option type.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionTypes.AncientOption">
+            <summary>
+            Gets the ancient option type.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionTypes.AncientBonus">
+            <summary>
+            Gets the ancient bonus option type.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionTypes.Level380Option">
+            <summary>
+            Gets the level380 option type.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemOptionTypes.SocketOption">
+            <summary>
+            Gets the socket option type.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.Items.ItemSetGroup">
+            <summary>
+            Defines an item set group. With (partial) completion of the set, addional options are getting applied.
+            </summary>
+            <remarks>
+            With this we can define a lot of things, for example:
+              - double wear bonus of single swords
+              - set bonus for defense rate
+              - set bonus for defense, if level is greater than 9
+              - ancient sets
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemSetGroup.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemSetGroup.AlwaysApplies">
+            <summary>
+            Gets or sets a value indicating whether all of the options of this item set always apply.
+            If not, the minimum item count and the minimum set levels are respected.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemSetGroup.CountDistinct">
+            <summary>
+            Gets or sets a value indicating whether the items are counted distincly.
+            </summary>
+            <remarks>
+            For example, for the double wear bonus this has to be non-distinct, else we wouldn't get the bonus for wearing two of the same kind of swords.
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemSetGroup.MinimumItemCount">
+            <summary>
+            Gets or sets the minimum item count which is needed to get the bonus.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemSetGroup.SetLevel">
+            <summary>
+            Gets or sets the minimum level which all of the items of the set need to have to get the bonus.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemSetGroup.Options">
+            <summary>
+            Gets or sets the options. If the options depend on the item count, this options need to be ordered correctly.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemSetGroup.Items">
+            <summary>
+            Gets or sets the items of this set.
+            </summary>
+            <remarks>
+            Here we can define additional bonus options, like the ancient options (e.g. +5 / +10 Str etc.).
+            </remarks>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.Items.ItemSlotType">
+            <summary>
+            The item slot type. Each of this may have one or more actual item slots.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemSlotType.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.ItemSlotType.ItemSlots">
+            <summary>
+            Gets or sets the item slots of this slot type.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.Items.LevelBonus">
+            <summary>
+            Defines a constant bonus, depending on item level.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Configuration.Items.LevelBonus.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.DataModel.Configuration.Items.LevelBonus"/> class.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Configuration.Items.LevelBonus.#ctor(System.Int32,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.DataModel.Configuration.Items.LevelBonus"/> class.
+            </summary>
+            <param name="level">The level.</param>
+            <param name="constantValue">The constant value.</param>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.LevelBonus.Level">
+            <summary>
+            Gets or sets the level of the item.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.LevelBonus.AdditionalValueElement">
+            <summary>
+            Gets or sets the additional value element to the base value.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Items.LevelBonus.AdditionalValue">
+            <summary>
+            Gets or sets the additional value to the base value.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.JewelMix">
+            <summary>
+            Defines a jewel mix.
+            Some <see cref="P:MUnique.OpenMU.DataModel.Configuration.JewelMix.SingleJewel"/> can be mixed together to a single <see cref="P:MUnique.OpenMU.DataModel.Configuration.JewelMix.MixedJewel"/> to save storage place.
+            When single jewels are needed again, the client can unmix his <see cref="P:MUnique.OpenMU.DataModel.Configuration.JewelMix.MixedJewel"/> back to several <see cref="P:MUnique.OpenMU.DataModel.Configuration.JewelMix.SingleJewel"/>.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.JewelMix.Number">
+            <summary>
+            Gets or sets gets the number of the mix.
+            </summary>
+            <remarks>
+            This number is a reference for the client.
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.JewelMix.SingleJewel">
+            <summary>
+            Gets or sets gets the single jewel item definition.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.JewelMix.MixedJewel">
+            <summary>
+            Gets or sets gets the mixed jewel item definition.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.LevelDependentDamage">
+            <summary>
+            Defines a level dependent damage.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.LevelDependentDamage.Level">
+            <summary>
+            Gets or sets the level belonging to this damage value.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.LevelDependentDamage.Damage">
+            <summary>
+            Gets or sets the damage belonging to this level.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.MainPacketHandlerConfiguration">
+            <summary>
+            The configuration for a main packet handler.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MainPacketHandlerConfiguration.ClientVersion">
+            <summary>
+            Gets or sets the client version.
+            </summary>
+            <remarks>
+            = new byte[] { 0x31, 0x30, 0x34, 0x30, 0x34 };
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MainPacketHandlerConfiguration.ClientSerial">
+            <summary>
+            Gets or sets the client serial.
+            </summary>
+            <remarks>
+            Encoding.ASCII.GetBytes("k1Pk2jcET48mxL3b");
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MainPacketHandlerConfiguration.AppearanceSerializerClassName">
+            <summary>
+            Gets or sets the name of the appearance serializer class.
+            If no explicit class name is specified, a default one will be used.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MainPacketHandlerConfiguration.PacketHandlers">
+            <summary>
+            Gets or sets the packet handlers of this main packet handler.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.MasterSkillDefinition">
+            <summary>
+            The definition of a master skill. One skill can have 0-n master skill definitions,
+            for example one skill can be used for different character classes at different Rank-Levels at different Roots.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MasterSkillDefinition.Root">
+            <summary>
+            Gets or sets the root.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MasterSkillDefinition.RequiredMasterSkills">
+            <summary>
+            Gets or sets a collection with the required skills.
+            Just one skill (of at least level 10) of this list is required
+            to meet the requirements when learning this skill.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MasterSkillDefinition.Rank">
+            <summary>
+            Gets or sets the rank.
+            The rang determines on which level the skill is located.
+            A skill at a higher rank can be learned, if there is at least
+            one skill of the same tree root at the direct rank below,
+            with a level same or greater than 10.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MasterSkillDefinition.CharacterClass">
+            <summary>
+            Gets or sets the character class to which this definition belongs.
+            One master definiton is only valid for one master character class.
+            One skill can be a master skill of more than one character,
+            but with different requisitions.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.MasterSkillRoot">
+            <summary>
+            The root of a master skill tree. One character can have more than one root.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MasterSkillRoot.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MasterSkillRoot.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.MonsterAttribute">
+            <summary>
+            The attribute and value of a monster.
+            </summary>
+            <remarks>
+            Just needed for entity framework, because it does not support the mapping of dictionaries. May be removed in the future.
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterAttribute.AttributeDefinition">
+            <summary>
+            Gets or sets the attribute definition.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterAttribute.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.SpawnTrigger">
+            <summary>
+            Defines the trigger when a monster spawns.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.SpawnTrigger.Automatic">
+            <summary>
+            The monster spawns and respawns automatically.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.SpawnTrigger.AutomaticDuringEvent">
+            <summary>
+            The monster spawns automatically during an event.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.SpawnTrigger.OnceAtEventStart">
+            <summary>
+            The monster spawns just once at the beginning of an event.
+            </summary>
+            <remarks>
+            For example blood castle gates, statues. Also golden monsters.
+            </remarks>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.MonsterSpawnArea">
+            <summary>
+            Defines an monster spawn area.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterSpawnArea.MonsterDefinition">
+            <summary>
+            Gets or sets the monster definition.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterSpawnArea.GameMap">
+            <summary>
+            Gets or sets the game map.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterSpawnArea.X1">
+            <summary>
+            Gets or sets the upper left corner x coordinate.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterSpawnArea.Y1">
+            <summary>
+            Gets or sets the upper left corner y coordinate.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterSpawnArea.X2">
+            <summary>
+            Gets or sets the bottom right corner x coordinate.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterSpawnArea.Y2">
+            <summary>
+            Gets or sets the bottom right corner y coordinate.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterSpawnArea.Direction">
+            <summary>
+            Gets or sets the looking direction when spawning.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterSpawnArea.Quantity">
+            <summary>
+            Gets or sets the quantity of monsters which should spawn in the defined area.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterSpawnArea.SpawnTrigger">
+            <summary>
+            Gets or sets the spawn trigger.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Configuration.MonsterSpawnArea.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.NpcWindow">
+            <summary>
+            Type of the window which will be openend when talking to the npc.
+            TODO: Maybe change to a class and do it data-driven.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.Undefined">
+            <summary>
+            No window defined.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.Merchant">
+            <summary>
+            A merchant window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.Merchant1">
+            <summary>
+            Another merchant window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.Storage">
+            <summary>
+            A storage window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.VaultStorage">
+            <summary>
+            A vault storage.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.ChaosMachine">
+            <summary>
+            A chaos machine window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.DevilSquare">
+            <summary>
+            A devil square window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.BloodCastle">
+            <summary>
+            A blood castle window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.PetTrainer">
+            <summary>
+            The pet trainer window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.Lahap">
+            <summary>
+            The lahap window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.CastleSeniorNPC">
+            <summary>
+            The castle senior window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.ElphisRefinery">
+            <summary>
+            The elphis refinery window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.RefineStoneMaking">
+            <summary>
+            The refine stone making window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.RemoveJohOption">
+            <summary>
+            The jewel of harmony option removal window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.IllusionTemple">
+            <summary>
+            The illusion temple window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.ChaosCardCombination">
+            <summary>
+            The chaos card combination window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.CherryBlossomBranchesAssembly">
+            <summary>
+            The cherry blossom branches assembly window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.SeedMaster">
+            <summary>
+            The seed master window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.SeedResearcher">
+            <summary>
+            The seed researcher window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.StatReInitializer">
+            <summary>
+            The stat reinitializer window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.DelgadoLuckyCoinRegistration">
+            <summary>
+            The delgado lucky coin registration window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.DoorkeeperTitusDuelWatch">
+            <summary>
+            The doorkeeper titus duel watch window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.LugardDoppelgangerEntry">
+            <summary>
+            The lugard doppelganger entry window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.JerintGaionEvententry">
+            <summary>
+            The jerint gaion event entry window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.JuliaWarpMarketServer">
+            <summary>
+            The julia warp market server window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.GuildMaster">
+            <summary>
+            The guild master window.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.NpcWindow.CombineLuckyItem">
+            <summary>
+            The dialog window which allows to exchange or refine Lucky Item.
+            Used by NPC "David".
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.MonsterDefinition">
+            <summary>
+            A definition for a monster (or NPC in general).
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterDefinition.Number">
+            <summary>
+            Gets or sets the unique number of this monster.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterDefinition.Designation">
+            <summary>
+            Gets or sets the designation of this monster.
+            Not relevant for the server, however helpful for debugging/logging.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterDefinition.MoveRange">
+            <summary>
+            Gets or sets the range in which a monster will move randomly?
+            It is not used yet. TODO: Find out what it's really good for. Remove, if not needed.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterDefinition.AttackRange">
+            <summary>
+            Gets or sets the attack range in which the monster can attack without moving closer to the target.
+            </summary>
+            <value>
+            The attack range.
+            </value>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterDefinition.ViewRange">
+            <summary>
+            Gets or sets the view range in which the monster can recognize its targets.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterDefinition.MoveDelay">
+            <summary>
+            Gets or sets the move delay for each step.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterDefinition.AttackDelay">
+            <summary>
+            Gets or sets the attack delay, which is the time between attacks.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterDefinition.RespawnDelay">
+            <summary>
+            Gets or sets the delay which is waited until a died instance respawns.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterDefinition.Attribute">
+            <summary>
+            Gets or sets the attribute.
+            Not sure what this is.
+            Maybe the maximum numbers of concurrent additional attributes / magic effects?
+            TODO
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterDefinition.Skill">
+            <summary>
+            Gets or sets the skill.
+            TODO Not sure what this means yet.
+            I guess it is the magic effect, like stunning (skill 23 @ Dark Elf)
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterDefinition.NumberOfMaximumItemDrops">
+            <summary>
+            Gets or sets the number of maximum item drops after an instance of this monster died.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterDefinition.NpcWindow">
+            <summary>
+            Gets or sets the id of the npc window.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterDefinition.AttackSkill">
+            <summary>
+            Gets or sets the skill with which this monster is attacking. Also known as "Attack type".
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterDefinition.MerchantStore">
+            <summary>
+            Gets or sets the items of the merchant store. Is only relevant for merchant NPCs.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterDefinition.ItemCraftings">
+            <summary>
+            Gets or sets the item craftings. Is only relevant for crafting NPCs (chaos goblin etc.).
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterDefinition.DropItemGroups">
+            <summary>
+            Gets or sets the drop item groups.
+            Some monsters drop special items. Examples: Kundun has the chance to drop ancient items.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterDefinition.Attributes">
+            <summary>
+            Gets or sets the attributes of this monster.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MonsterDefinition.Item(MUnique.OpenMU.AttributeSystem.AttributeDefinition)">
+            <summary>
+            Attribute default accessor.
+            </summary>
+            <param name="key">The attribute.</param>
+            <returns>The value of the attribute.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Configuration.MonsterDefinition.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.PacketHandlerConfiguration">
+            <summary>
+            Configuration of a packet handler.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.PacketHandlerConfiguration.PacketIdentifier">
+            <summary>
+            Gets or sets the packet identifier.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.PacketHandlerConfiguration.PacketHandlerClassName">
+            <summary>
+            Gets or sets the name of the packet handler class. It is used to create the packet handler.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.PacketHandlerConfiguration.NeedsToBeEncrypted">
+            <summary>
+            Gets or sets a value indicating whether the packet which is handled by this packet handler needs to be encrypted.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.PacketHandlerConfiguration.SubPacketHandlers">
+            <summary>
+            Gets or sets the sub packet handlers, if a packet handler has child packet handler.
+            </summary>
+            <remarks>
+            E.g. 0xF3 and Character management related packets:
+                - 0xF3 0x00: Request character list
+                - 0xF3 0x01: Create character
+                - 0xF3 0x02: Delete character
+                - 0xF3 0x03: Select character
+                - and so on...
+            </remarks>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.StatAttributeDefinition">
+            <summary>
+            Defines a stat attribute, which may be increasable by the player.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Configuration.StatAttributeDefinition.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.DataModel.Configuration.StatAttributeDefinition"/> class.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Configuration.StatAttributeDefinition.#ctor(MUnique.OpenMU.AttributeSystem.AttributeDefinition,System.Single,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.DataModel.Configuration.StatAttributeDefinition" /> class.
+            </summary>
+            <param name="attribute">The attribute.</param>
+            <param name="baseValue">The base value.</param>
+            <param name="increasableByPlayer">if set to <c>true</c> it is increasable by the player.</param>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.StatAttributeDefinition.Attribute">
+            <summary>
+            Gets or sets the attribute definition of this stat attribute.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.StatAttributeDefinition.BaseValue">
+            <summary>
+            Gets or sets the base value, which is the initial value without an increase of the player.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.StatAttributeDefinition.IncreasableByPlayer">
+            <summary>
+            Gets or sets a value indicating whether this stat is increasable by the player in any way.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.WarpInfo">
+            <summary>
+            Defines a warp list entry.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.WarpInfo.Index">
+            <summary>
+            Gets or sets the index.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.WarpInfo.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.WarpInfo.Costs">
+            <summary>
+            Gets or sets the warp costs.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.WarpInfo.LevelRequirement">
+            <summary>
+            Gets or sets the level requirement which a character needs to fulfill so that it can warp to the <see cref="P:MUnique.OpenMU.DataModel.Configuration.WarpInfo.Gate"/>.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.WarpInfo.Gate">
+            <summary>
+            Gets or sets the gate.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.CharacterClass">
+            <summary>
+            Defines a character class.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.CharacterClass.Number">
+            <summary>
+            Gets or sets the id of a character class.
+            This will be used to identify the class when getting created,
+            and as identifier to be sent to client.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.CharacterClass.Name">
+            <summary>
+            Gets or sets the name of the character class.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.CharacterClass.CanGetCreated">
+            <summary>
+            Gets or sets a value indicating whether this character class can get created by the user.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.CharacterClass.LevelRequirementByCreation">
+            <summary>
+            Gets or sets the level requirement when getting created.
+            The level requirement must be fulfilled by another character of the same account.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.CharacterClass.CreationAllowedFlag">
+            <summary>
+            Gets or sets the creation allowed flag which is sent to the client in the character list message if this character class is in its <see cref="P:MUnique.OpenMU.DataModel.Entities.Account.UnlockedCharacterClasses"/>.
+            </summary>
+            <remarks>
+            Flag about which characters can be created with this account:
+            1 = Summoner
+            2 = Dark Lord
+            4 = Magic Gladiator
+            8 = Rage Fighter
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.CharacterClass.PointsPerLevelUp">
+            <summary>
+            Gets or sets the upgrade points per level up.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.CharacterClass.NextGenerationClass">
+            <summary>
+            Gets or sets the next generation class, to which a character can upgrade after
+            fulfilling certain requirements, like quests.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.CharacterClass.IsMasterClass">
+            <summary>
+            Gets or sets a value indicating whether this class is a master class and therefore can receive master experience for the master tree.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.CharacterClass.LevelWarpRequirementReductionPercent">
+            <summary>
+            Gets or sets the percent by which the moving level requirement for warping to other maps is reduced.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.CharacterClass.StatAttributes">
+            <summary>
+            Gets or sets the stat attributes.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.CharacterClass.AttributeCombinations">
+            <summary>
+            Gets or sets the attribute combinations.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.CharacterClass.BaseAttributeValues">
+            <summary>
+            Gets or sets the base attribute values.
+            For example the amount of health a character got without any added stat point.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.CharacterClass.HomeMap">
+            <summary>
+            Gets or sets the home map.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.GameMapDefinition">
+            <summary>
+            Configuration of a map. Contains all information to create an instance of a GameMap.
+            </summary>
+            <remarks>
+            Some maps have different possible status, for expample the crywolf map:
+                1) Balgass is undeafeated - monsters are not dropping special items
+                2) Balgass is defeated - monsters are dropping special items
+                3) Crywolf event is ongoing - The normal monsters are not there(?), but event monsters.
+            For each of this status, there exist different terrain maps (safezones are different, etc.).
+            To reflect this requirement on this data model, for each status there must be one game map definition.
+            The switch between this status and its corresponding game map definitions should be done in game logic.
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameMapDefinition.Number">
+            <summary>
+            Gets or sets the number of the map.
+            </summary>
+            <remarks>
+            This number is identifying the map on the client.
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameMapDefinition.Name">
+            <summary>
+            Gets or sets the name of the map.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameMapDefinition.TerrainData">
+            <summary>
+            Gets or sets the terrain data.
+            </summary>
+            <remarks>
+            Content of the *.att file in the original server.
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameMapDefinition.MonsterSpawns">
+            <summary>
+            Gets or sets the defined monster spawn areas.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameMapDefinition.EnterGates">
+            <summary>
+            Gets or sets the enter gates, though which the player can move to other maps.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameMapDefinition.ExpMultiplier">
+            <summary>
+            Gets or sets the exp multiplier for this map.
+            </summary>
+            <value>
+            The exp multiplier.
+            </value>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameMapDefinition.SafezoneMap">
+            <summary>
+            Gets or sets the game map to which the player will be brought when it died.
+            One of the <see cref="P:MUnique.OpenMU.DataModel.Configuration.GameMapDefinition.ExitGates"/> where <see cref="P:MUnique.OpenMU.DataModel.Configuration.ExitGate.IsSpawnGate"/> is selected.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameMapDefinition.ExitGates">
+            <summary>
+            Gets or sets the spawn gates.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.GameMapDefinition.DropItemGroups">
+            <summary>
+            Gets or sets the DropItemGroup of this map.
+            Some maps contain different drops. Examples: land of trials drops ancient items, kanturu drops gemstones.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Configuration.GameMapDefinition.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.MagicEffectDefinition">
+            <summary>
+            Magic Effect Definition. It can be an effect from an consumed item, or by a buff.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MagicEffectDefinition.Number">
+            <summary>
+            Gets or sets the number.
+            </summary>
+            <remarks>
+            This number is a reference for the game client.
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MagicEffectDefinition.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MagicEffectDefinition.SubType">
+            <summary>
+            Gets or sets the sub type.
+            Same sub type = cant stack. adding a magic effect with the same sub type will cause the existing magic effect to disappear.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MagicEffectDefinition.InformObservers">
+            <summary>
+            Gets or sets a value indicating whether the effect change is sent to observers.
+            </summary>
+            <remarks>
+            Some effects are not externally visible, but only to the player himself.
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MagicEffectDefinition.StopByDeath">
+            <summary>
+            Gets or sets a value indicating whether the effect gets stopped by a death of the player.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MagicEffectDefinition.SendDuration">
+            <summary>
+            Gets or sets a value indicating whether the duration of the effect should be sent.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.MagicEffectDefinition.PowerUpDefinition">
+            <summary>
+            Gets or sets the powerUp definition which is used to create the actual power up element.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.DamageType">
+            <summary>
+            Defines the damage type of a skill.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.DamageType.None">
+            <summary>
+            No damage type.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.DamageType.Physical">
+            <summary>
+            The physical damage type.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.DamageType.Wizardry">
+            <summary>
+            The wizardry damage type.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.DamageType.Curse">
+            <summary>
+            The curse damage type.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.DamageType.SummonedMonster">
+            <summary>
+            The summoned monster damage type.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.DamageType.All">
+            <summary>
+            All damage types.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.SkillType">
+            <summary>
+            The skill types.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.SkillType.DirectHit">
+            <summary>
+            The skill hit its target directly.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.SkillType.CastleSiegeSpecial">
+            <summary>
+            The castle siege special skill.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.SkillType.CastleSiegeSkill">
+            <summary>
+            Same as <see cref="F:MUnique.OpenMU.DataModel.Configuration.SkillType.DirectHit"/> but only applyable during castle siege event.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.SkillType.AreaSkillAutomaticHits">
+            <summary>
+            Area skill damage, which automatically hit all targets in its target area. No declaration of hits by the client.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.SkillType.AreaSkillExplicitHits">
+            <summary>
+            Area skill damage, but the hits have to be declared by the client.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.SkillType.Buff">
+            <summary>
+            The buff skill type. Applies magic effects on players.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.SkillType.PassiveBoost">
+            <summary>
+            The passive boost skill type. Applies boosts to the player who has learned this skill, without the need to be casted.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Configuration.SkillType.Other">
+            <summary>
+            Other skill type.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Configuration.Skill">
+            <summary>
+            Defines a skill.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Skill.SkillID">
+            <summary>
+            Gets or sets the skill identifier.
+            </summary>
+            <remarks>
+            The client is referencing skills by this id.
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Skill.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Skill.Requirements">
+            <summary>
+            Gets or sets the requirements to execute the skill.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Skill.ConsumeRequirements">
+            <summary>
+            Gets or sets the attributes which values will be consumed by executing this skill.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Skill.Range">
+            <summary>
+            Gets or sets the maximum range between executer of the skill and the target object.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Skill.DamageType">
+            <summary>
+            Gets or sets the type of the damage.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Skill.SkillType">
+            <summary>
+            Gets or sets the type of the skill.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Skill.MagicEffectDef">
+            <summary>
+            Gets or sets the magic effect definition. It will be applied for buff skills.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Skill.QualifiedCharacters">
+            <summary>
+            Gets or sets the character classes which are qualified to learn and use this skill.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Skill.MasterDefinitions">
+            <summary>
+            Gets or sets the master definitions. Only relevant for master skills.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Skill.PassivePowerUps">
+            <summary>
+            Gets or sets the passive power ups, depending on the skill level. Only relevant for skills of type <see cref="F:MUnique.OpenMU.DataModel.Configuration.SkillType.PassiveBoost"/>.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Configuration.Skill.AttackDamage">
+            <summary>
+            Gets or sets the level dependent attack damage. Only relevant for attack skills.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Entities.Guild">
+            <summary>
+            A guild is a group of players who like to play together.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Guild.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Guild.Members">
+            <summary>
+            Gets or sets the members.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Entities.GuildMember">
+            <summary>
+            Information about a guild member.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Entities.GuildMember.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.DataModel.Entities.GuildMember"/> class.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Entities.GuildMember.#ctor(System.Guid)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.DataModel.Entities.GuildMember"/> class.
+            </summary>
+            <param name="id">The identifier.</param>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.GuildMember.Id">
+            <summary>
+            Gets or sets the identifier. Should be the same id as the character id to which it belongs.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.GuildMember.GuildId">
+            <summary>
+            Gets or sets the guild identifier to which the member belongs.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.GuildMember.Status">
+            <summary>
+            Gets or sets the status of the member.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Entities.ItemOptionLink">
+            <summary>
+            This class defines a link between the item and the conrete item option which the actual item instance possess.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.ItemOptionLink.ItemOption">
+            <summary>
+            Gets or sets the item option.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.ItemOptionLink.Level">
+            <summary>
+            Gets or sets the level.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Entities.ItemOptionLink.Clone">
+            <summary>
+            Clones this instance.
+            </summary>
+            <returns>The cloned instance.</returns>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Entities.ItemOptionLink.AssignValues(MUnique.OpenMU.DataModel.Entities.ItemOptionLink)">
+            <summary>
+            Assigns the values.
+            </summary>
+            <param name="otherLink">The other link.</param>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Entities.AccountState">
+            <summary>
+            The state of an account.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Entities.AccountState.Normal">
+            <summary>
+            Normal player account.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Entities.AccountState.Spectator">
+            <summary>
+            Spectator account, invisible to players and monsters.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Entities.AccountState.GameMaster">
+            <summary>
+            Game Master account.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Entities.AccountState.GameMasterInvisible">
+            <summary>
+            Game Master account, invisible to players and monsters.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Entities.AccountState.Banned">
+            <summary>
+            Banned account.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Entities.AccountState.TemporarilyBanned">
+            <summary>
+            Temporarily banned account.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Entities.Account">
+            <summary>
+            The account of a player.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Account.LoginName">
+            <summary>
+            Gets or sets the unique login name.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Account.PasswordHash">
+            <summary>
+            Gets or sets the hash of the password, preferrably of BCrypt.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Account.SecurityCode">
+            <summary>
+            Gets or sets the security code which is used to confirm character deletion and guild kicks.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Account.EMail">
+            <summary>
+            Gets or sets the e mail address.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Account.UnlockedCharacterClasses">
+            <summary>
+            Gets or sets the unlocked character classes which are locked by default.
+            </summary>
+            <remarks>
+            Some classes are only available when the player reached a certain level before, or when he paid for some unlock ticket.
+            </remarks>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Account.RegistrationDate">
+            <summary>
+            Gets or sets the registration date.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Account.State">
+            <summary>
+            Gets or sets the state.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Account.TimeZone">
+            <summary>
+            Gets or sets the timezone of the player, difference to UTC.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Account.VaultPassword">
+            <summary>
+            Gets or sets the vault password.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Account.Vault">
+            <summary>
+            Gets or sets the vault.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Account.IsVaultExtended">
+            <summary>
+            Gets or sets a value indicating whether this instance is vault extended.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Account.Characters">
+            <summary>
+            Gets or sets the characters.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Entities.HeroState">
+            <summary>
+            The hero state of a player. Given enough time, the state converges to <see cref="F:MUnique.OpenMU.DataModel.Entities.HeroState.Normal"/>.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Entities.HeroState.New">
+            <summary>
+            The character is new.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Entities.HeroState.Hero">
+            <summary>
+            The character is a hero.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Entities.HeroState.MediumHero">
+            <summary>
+            The character is a hero, but it's some time ago.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Entities.HeroState.LightHero">
+            <summary>
+            The character is a hero, but the hero state is almost gone.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Entities.HeroState.Normal">
+            <summary>
+            The normal state.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Entities.HeroState.PlayerKillWarning">
+            <summary>
+            The character killed another character, and has a kill warning.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Entities.HeroState.PlayerKiller1stStage">
+            <summary>
+            The character killed two characters, and has some restrictions.
+            </summary>
+        </member>
+        <member name="F:MUnique.OpenMU.DataModel.Entities.HeroState.PlayerKiller2ndStage">
+            <summary>
+            The character killed more than two characters, and has hard restrictions.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Entities.Character">
+            <summary>
+            The character of a player.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.CharacterClass">
+            <summary>
+            Gets or sets the character class.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.CharacterSlot">
+            <summary>
+            Gets or sets the character slot in the account.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.CreateDate">
+            <summary>
+            Gets or sets the create date.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.Experience">
+            <summary>
+            Gets or sets the experience.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.MasterExperience">
+            <summary>
+            Gets or sets the master experience.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.LevelUpPoints">
+            <summary>
+            Gets or sets the remaining level up points which can be spent on increasable stat attributes.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.MasterLevelUpPoints">
+            <summary>
+            Gets or sets the master level up points which can be spent on master skills.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.CurrentMap">
+            <summary>
+            Gets or sets the current game map.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.PositionX">
+            <summary>
+            Gets or sets the x-coordinate of its map position.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.PositionY">
+            <summary>
+            Gets or sets the y-coordinate of its map position.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.PlayerKillCount">
+            <summary>
+            Gets or sets the player kill count.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.StateRemainingSeconds">
+            <summary>
+            Gets or sets the remaining seconds for the current hero state, when the player state is not normal.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.State">
+            <summary>
+            Gets or sets the hero state.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.QuestInfo">
+            <summary>
+            Gets or sets the quest info. Don't know yet what its content is.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.UsedFruitPoints">
+            <summary>
+            Gets or sets the used fruit points.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.UsedNegFruitPoints">
+            <summary>
+            Gets or sets the used negative fruit points.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.InventoryExtensions">
+            <summary>
+            Gets or sets the number of inventory extensions.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.KeyConfiguration">
+            <summary>
+            Gets or sets the key configuration, which is set by the client and just saved as is.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.Attributes">
+            <summary>
+            Gets or sets the stat attributes.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.Letters">
+            <summary>
+            Gets or sets the letters.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.LearnedSkills">
+            <summary>
+            Gets or sets the learned skills.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.Inventory">
+            <summary>
+            Gets or sets the inventory.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Character.DropItemGroups">
+            <summary>
+            Gets or sets the drop item groups.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Entities.AppearanceData">
+            <summary>
+            The appearance data of an character.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.AppearanceData.CharacterClass">
+            <summary>
+            Gets or sets the character class.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.AppearanceData.EquippedItems">
+            <summary>
+            Gets or sets the equipped items.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.AppearanceData.MUnique#OpenMU#DataModel#Entities#IAppearanceData#EquippedItems">
+            <inheritdoc />
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Entities.IAppearanceData">
+            <summary>
+            The interface for the appearance data.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.IAppearanceData.CharacterClass">
+            <summary>
+            Gets the character class.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.IAppearanceData.EquippedItems">
+            <summary>
+            Gets the equipped items.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Entities.Item">
+            <summary>
+            The item.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Item.ItemSlot">
+            <summary>
+            Gets or sets the item slot in the <see cref="T:MUnique.OpenMU.DataModel.Entities.ItemStorage"/>.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Item.Definition">
+            <summary>
+            Gets or sets the item definition.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Item.Durability">
+            <summary>
+            Gets or sets the currently remaining durability.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Item.Level">
+            <summary>
+            Gets or sets the level of the item.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Item.HasSkill">
+            <summary>
+            Gets or sets a value indicating whether this item instance provides the weapon skill while being equipped.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Item.ItemOptions">
+            <summary>
+            Gets or sets the item options.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Item.ItemSetGroups">
+            <summary>
+            Gets or sets the item set group (Ancient Set,).
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Item.SocketCount">
+            <summary>
+            Gets or sets the socket count. This limits the amount of socket options in the <see cref="P:MUnique.OpenMU.DataModel.Entities.Item.ItemOptions"/>.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.Item.StorePrice">
+            <summary>
+            Gets or sets the price which was set by the player for his personal store.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Entities.Item.AssignValues(MUnique.OpenMU.DataModel.Entities.Item)">
+            <summary>
+            Assigns the values of another item to this item.
+            </summary>
+            <param name="otherItem">The other item.</param>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Entities.Item.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Entities.Item.CloneItemOptionLink(MUnique.OpenMU.DataModel.Entities.ItemOptionLink)">
+            <summary>
+            Clones the item option link.
+            </summary>
+            <param name="link">The link.</param>
+            <returns>The cloned item option link.</returns>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Entities.ItemAppearance">
+            <summary>
+            Appearance of an item.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.ItemAppearance.ItemSlot">
+            <summary>
+            Gets or sets the item slot.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.ItemAppearance.Definition">
+            <summary>
+            Gets or sets the definition of the item.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.ItemAppearance.Level">
+            <summary>
+            Gets or sets the level.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.ItemAppearance.VisibleOptions">
+            <summary>
+            Gets or sets the visible options.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Entities.ItemStorage">
+            <summary>
+            A storage where items can be stored.
+            </summary>
+        </member>
+        <member name="M:MUnique.OpenMU.DataModel.Entities.ItemStorage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MUnique.OpenMU.DataModel.Entities.ItemStorage"/> class.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.ItemStorage.Items">
+            <summary>
+            Gets or sets the items which are stored.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.ItemStorage.Money">
+            <summary>
+            Gets or sets the money which is stored.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Entities.LetterBody">
+            <summary>
+            The body of a letter.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.LetterBody.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.LetterBody.Header">
+            <summary>
+            Gets or sets the header.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.LetterBody.Message">
+            <summary>
+            Gets or sets the message.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.LetterBody.Rotation">
+            <summary>
+            Gets or sets the rotation of the sender character.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.LetterBody.Animation">
+            <summary>
+            Gets or sets the animation of the sender character.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.LetterBody.SenderAppearance">
+            <summary>
+            Gets or sets the sender appearance data.
+            </summary>
+        </member>
+        <member name="T:MUnique.OpenMU.DataModel.Entities.SkillEntry">
+            <summary>
+            An actual entry of a skill in the characters skill list.
+            </summary>
+        </member>
+        <member name="E:MUnique.OpenMU.DataModel.Entities.SkillEntry.PropertyChanged">
+            <summary>
+            Occurs when a property changed.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.SkillEntry.Skill">
+            <summary>
+            Gets or sets the skill definition.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.SkillEntry.Level">
+            <summary>
+            Gets or sets the level of the skill, primarily master skill level.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.SkillEntry.BuffPowerUp">
+            <summary>
+            Gets or sets the power up element of this skill of this player. It is a "cached" element which will be created on demand and can be applied multiple times.
+            </summary>
+        </member>
+        <member name="P:MUnique.OpenMU.DataModel.Entities.SkillEntry.PowerUpDuration">
+            <summary>
+            Gets or sets the duration of the <see cref="P:MUnique.OpenMU.DataModel.Entities.SkillEntry.BuffPowerUp"/>.
+            </summary>
+            <remarks>
+            It is an IElement, because the duration can be dependent from the player attributes.
+            </remarks>
+        </member>
+    </members>
+</doc>
