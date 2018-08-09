@@ -1,0 +1,124 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using com.shephertz.app42.paas.sdk.csharp;
+using com.shephertz.app42.paas.sdk.csharp.log;
+using UnityEngine;
+
+public interface ILogger
+{
+    void HandleLog(string logString, string stackTrace, LogType type);
+}
+
+public delegate void ILoggerDelegate(string logString, string stackTrace, LogType type);
+
+public class CrittercismAndroidLogger : ILogger
+{
+    private const string CrittercismAppID = "54b793d651de5e9f042ecc65";
+
+    public CrittercismAndroidLogger()
+    {
+        CrittercismAndroid.Init (CrittercismAppID);
+    }
+
+    public void HandleLog(string logString, string stackTrace, LogType type)
+    {
+        //switch (type)
+        //{
+        //    case LogType.Error:
+        //        CrittercismAndroid.LogHandledException(new Exception(logString));
+        //        break;
+        //    case LogType.Assert:
+        //        break;
+        //    case LogType.Warning:
+        //        CrittercismAndroid.LeaveBreadcrumb(logString);
+        //        break;
+        //    case LogType.Log:
+        //        CrittercismAndroid.LeaveBreadcrumb(logString);
+        //        break;
+        //    case LogType.Exception:
+        //        CrittercismAndroid.LogHandledException(new Exception(logString));
+        //        break;
+        //    default:
+        //        throw new ArgumentOutOfRangeException("type");
+        //}
+    }
+}
+
+public class CrashlitycsLogger : ILogger
+{
+    private static AndroidJavaObject cls_Crashlytics;
+
+    private AndroidJavaClass cls_UnityPlayer;
+    private AndroidJavaObject obj_Activity;
+
+    public CrashlitycsLogger()
+    {
+#if !UNITY_ANDROID || UNITY_EDITOR
+        return;
+#endif
+
+        Debug.Log("Creating CrashlitycsLogger...");
+        //using (AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+        {
+            //using (AndroidJavaObject obj_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity"))
+            obj_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+            {
+                cls_Crashlytics = new AndroidJavaClass("com.crashlytics.android.Crashlytics");
+                cls_Crashlytics.CallStatic("start", obj_Activity);
+                WriteLog("CrashlitycsLogger started");
+                WriteLog("CrashlitycsLogger started next");
+                //WriteException("CrashlitycsLogger test exception");
+            }
+        }
+    }
+
+    public void WriteKey(string name, int value)
+    {
+        cls_Crashlytics.CallStatic("setInt", name, value);
+    }
+
+    public static void WriteLog2(string msg)
+    {
+        if (cls_Crashlytics == null) return;
+        cls_Crashlytics.CallStatic("log", 1, "SET", msg);
+    }
+
+    public void WriteLog(string msg)
+    {
+        //cls_Crashlytics.CallStatic("log", msg);
+        cls_Crashlytics.CallStatic("log", 1, "SET", msg);
+        WriteKey("key_2", 888);
+    }
+
+    public void WriteException(string msg)
+    {
+        WriteKey("key1", 777);
+        using (var cls_throwable = new AndroidJavaObject("java.lang.Throwable", msg))
+        {
+            //var obj = new AndroidJavaObject("java.lang.StackTraceElement", "q", "w", "e", 69);
+            //AndroidJavaObject[] array = new AndroidJavaObject[1];
+            //cls_throwable.Call("setStackTrace", AndroidJNI.Throw.Cre( new []{obj} ));
+            cls_Crashlytics.CallStatic("logException", cls_throwable);
+        }
+    }
+
+    public void Dispose()
+    {
+        if (cls_Crashlytics != null)
+        {
+            cls_Crashlytics.Dispose();
+        }
+    }
+
+    public void HandleLog(string logString, string stackTrace, LogType type)
+    {
+        switch (type)
+        {
+            case LogType.Error:
+                WriteException(logString);
+                break;
+            case LogType.Assert:
+                break;
+            case Log
