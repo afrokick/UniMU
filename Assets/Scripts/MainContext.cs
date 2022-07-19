@@ -40,15 +40,6 @@ public class MainContext : SignalContext
         injectionBinder.Bind<ICSClient>().To<CSClient>().ToSingleton();
         injectionBinder.Bind<IGSClient>().To<GSClient>().ToSingleton();
 
-        //NETWORK
-        injectionBinder.Bind<PacketHandler>().ToSingleton();
-
-        injectionBinder.Bind<SayHelloHandler>().ToSingleton();
-        injectionBinder.Bind<CSHandlers>().ToSingleton();
-        injectionBinder.Bind<GetServerListHandler>().ToSingleton();
-        injectionBinder.Bind<GetServerInfoHandler>().ToSingleton();
-
-        //injectionBinder.Bind<IInternetService>().To<InternetService>().ToSingleton();
         injectionBinder.Bind<LocalizationService>().ToSingleton();
 
         //injectionBinder.Bind<GameManager>().ToSingleton();
@@ -56,6 +47,7 @@ public class MainContext : SignalContext
         injectionBinder.Bind<ICoroutineExecuter>().To<CoroutineExecuter>().ToSingleton();
         injectionBinder.Bind<IStateMachine>().To<StateMachine>().ToSingleton();
 
+        BindHandlers();
         BindStates();
         BindViews();
 
@@ -74,60 +66,60 @@ public class MainContext : SignalContext
 
         commandBinder.Bind<OpenSelectServerScreenSignal>().To<LoadStateCommand<SelectServerState>>();
         commandBinder.Bind<OpenLoginScreenSignal>().To<LoadStateCommand<LoginState>>();
+        commandBinder.Bind<OpenCharactersScreenSignal>().To<LoadStateCommand<CharactersState>>();
+        commandBinder.Bind<OpenCreateCharacterPopupSignal>().To<LoadAdditionalStateCommand<CreateCharacterState>>();
+        commandBinder.Bind<OpenLoadingCharacterScreenSignal>().To<LoadStateCommand<LoadingCharacterState>>();
 
         commandBinder.Bind<ServerListUpdatedSignal>();
         commandBinder.Bind<ServerListItemUpdatedSignal>();
+        commandBinder.Bind<CharactersListUpdatedSignal>();
+        commandBinder.Bind<CharacterFocusedSignal>();
+        commandBinder.Bind<CharacterCreatedSignal>();
+        commandBinder.Bind<CharacterDeletedSignal>();
+        commandBinder.Bind<CharacterSelectedSignal>();
+        commandBinder.Bind<NewPlayersInScopeSignal>();
+
+        commandBinder.Bind<OpenWorldSignal>().To<LoadStateCommand<WorldState>>();
+
+        commandBinder.Bind<LoggedInSignal>().InSequence().To<LoadStateCommand<CharactersState>>();
+    }
+
+    private void BindHandlers()
+    {
+        //NETWORK
+        injectionBinder.Bind<PacketHandler>().ToSingleton();
+
+        var packetHandlerInterfaceType = typeof(IPacketHandler);
+        var handlers = this.GetType().Assembly.GetTypes().Where(type => type.IsClass && type.GetInterfaces().Contains(packetHandlerInterfaceType));
+
+        foreach (var handler in handlers)
+        {
+            injectionBinder.Bind(handler).ToSingleton();
+        }
     }
 
     private void BindStates()
     {
-        BindAsSelf<AlertState>();
-        BindAsSelf<PreloaderState>();
-        BindAsSelf<SelectServerState>();
-        BindAsSelf<LoginState>();
-    }
+        var baseStateType = typeof(BaseState);
+        var baseAdditionalStateType = typeof(BaseAdditionalState);
 
-    private void BindAsSelf<T>()
-    {
-        injectionBinder.Bind<T>().To<T>();
+        var states = this.GetType().Assembly.GetTypes().Where(type => type.IsSubclassOf(baseStateType) || type.IsSubclassOf(baseAdditionalStateType));
+
+        foreach (var stateType in states)
+        {
+            injectionBinder.Bind(stateType).To(stateType);
+        }
     }
 
     private void BindViews()
     {
-        InjectScreen<AlertPopup>("alert");
-        InjectScreen<LoaderPopup>("loader");
-
-        InjectScreen<PreloaderScreen>("preloader");
-        InjectScreen<SelectServerScreen>("selectServer");
-        InjectScreen<LoginScreen>("login");
-    }
-
-    private strange.extensions.injector.api.IInjectionBinding InjectScreen<T>(string name) where T : BasePopup
-    {
-        return injectionBinder.Bind<T>().ToValue(CreateScreen<T>(name));
-    }
-
-    private T CreateScreen<T>(string name) where T : BasePopup
-    {
-        T s = null;
-
-        if (_childs.ContainsKey(name))
-            s = _childs[name] as T;
-        else
+        foreach (var child in _childs.Values)
         {
-            var prefub = Resources.Load<GameObject>("screens/" + name);
+            child.gameObject.SetActive(false);
 
-            var obj = UnityUtils.Clone(prefub, _uiRoot);
+            var t = child.GetType();
 
-            s = obj.GetComponent<T>();
-
-            _childs.Add(name, s);
+            injectionBinder.Bind(t).ToValue(child);
         }
-
-        s.name = name;
-
-        s.gameObject.SetActive(false);
-
-        return s;
     }
 }

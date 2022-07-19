@@ -1,10 +1,10 @@
 public abstract class BaseAdditionalState : IAdditionalState
 {
     [Inject]
-    public IStateMachine StateMachine { get; private set; }
+    public IStateMachine StateMachine { get; set; }
 
     [Inject]
-    public HardwareBackPressSignal HardwareBackPressSignal { get; private set; }
+    public HardwareBackPressSignal HardwareBackPressSignal { get; set; }
 
     protected bool OnTop
     {

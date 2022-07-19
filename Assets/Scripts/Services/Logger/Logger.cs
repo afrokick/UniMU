@@ -9,11 +9,11 @@ public class Logger
     /// </summary>
     public static void ConfigureAllLogging()
     {
-        //var patternLayout = new PatternLayout
-        //{
-        //    ConversionPattern = "%date %-5level %logger - %message%newline"
-        //};
-        //patternLayout.ActivateOptions();
+        var patternLayout = new PatternLayout
+        {
+            ConversionPattern = "%date %-5level %logger - %message%newline"
+        };
+        patternLayout.ActivateOptions();
 
         //// setup the appender that writes to Log\EventLog.txt
         //var fileAppender = new RollingFileAppender
@@ -30,7 +30,7 @@ public class Logger
 
         var unityLogger = new UnityAppender
         {
-            Layout = new PatternLayout()
+            Layout = patternLayout
         };
         unityLogger.ActivateOptions();
 

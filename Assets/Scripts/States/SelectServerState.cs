@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class SelectServerState : BaseState
 {
@@ -14,12 +14,10 @@ public class SelectServerState : BaseState
     public ServerListUpdatedSignal ServerListUpdatedSignal { get; private set; }
     [Inject]
     public ServerListItemUpdatedSignal ServerListItemUpdatedSignal { get; private set; }
-    [Inject]
-    public OpenLoginScreenSignal OpenLoginScreenSignal { get; private set; }
 
     private ServerListInfoModel ServerListInfoModel { get; set; }
 
-    public override void Load()
+    public override async void Load()
     {
         SelectServerScreen.SelectClicked = ViewOnSelectClicked;
 
@@ -28,11 +26,11 @@ public class SelectServerState : BaseState
         ServerListUpdatedSignal.AddListener(OnServerListUpdated);
         ServerListItemUpdatedSignal.AddListener(OnServerListItemUpdated);
 
-        CSClient.Connect();
+        await CSClient.Connect("127.0.0.1", 44405);
 
         if (CSClient.Connected)
         {
-            CSClient.RequestServerList();
+            await CSClient.RequestServerList();
         }
         else
         {
@@ -57,25 +55,21 @@ public class SelectServerState : BaseState
         SelectServerScreen.UpdateServerList(model);
     }
 
-    private void OnServerListItemUpdated(ServerListItemInfoModel model)
+    private async void OnServerListItemUpdated(ServerListItemInfoModel model)
     {
-        MainModel.SelectedServerInfo = model;
-
         Debug.Log($"connect to {model.Ip}:{model.Port}");
 
-        GSClient.Connect(model.Ip, model.Port);
+        MainModel.SelectedServerInfo = model;
+
+        await GSClient.Connect(model.Ip, model.Port);
 
         CSClient.Disconnect();
-
-        OpenLoginScreenSignal.Dispatch();
     }
 
-    private void ViewOnSelectClicked()
+    private async void ViewOnSelectClicked()
     {
         var serverId = ServerListInfoModel.Servers[0].ServerId;
 
-        CSClient.GetServerInfo(serverId);
-
-        Debug.Log("send get info");
+        await CSClient.GetServerInfo(serverId);
     }
 }

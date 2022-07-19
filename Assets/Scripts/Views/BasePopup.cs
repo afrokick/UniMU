@@ -9,6 +9,6 @@
 
     public virtual void Hide()
     {
-		gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

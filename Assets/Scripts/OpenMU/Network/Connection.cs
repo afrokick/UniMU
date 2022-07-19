@@ -8,6 +8,7 @@ namespace MUnique.OpenMU.Network
     using System.Linq;
     using System.Net;
     using System.Net.Sockets;
+    using System.Threading.Tasks;
     using log4net;
 
     /// <summary>
@@ -15,7 +16,7 @@ namespace MUnique.OpenMU.Network
     /// </summary>
     public sealed class Connection : IConnection
     {
-        private const int BufferSize = 100;
+        private const int BufferSize = 1024;
         private readonly ILog log = LogManager.GetLogger(typeof(Connection));
         private readonly byte[] buffer = new byte[BufferSize];
         private readonly ListPacketQueue packetBuffer = new ListPacketQueue();
@@ -74,7 +75,7 @@ namespace MUnique.OpenMU.Network
         public bool Connected => this.socket != null && !this.disconnected && this.socket.Connected;
 
         /// <inheritdoc/>
-        public void Send(byte[] packet)
+        public async Task Send(byte[] packet)
         {
             if (this.Connected)
             {
@@ -100,7 +101,13 @@ namespace MUnique.OpenMU.Network
                     {
                         try
                         {
-                            currentSocket.Send(packet, SocketFlags.None);
+                            //var e = new SocketAsyncEventArgs
+                            //{
+                            //    SocketFlags = SocketFlags.None
+                            //};
+                            //e.SetBuffer(packet, 0, packet.Length);
+
+                            await currentSocket.SendAsync(new ArraySegment<byte>(packet), SocketFlags.None);
                         }
                         catch (Exception ex)
                         {
@@ -123,11 +130,9 @@ namespace MUnique.OpenMU.Network
                 }
 
                 this.log.Debug("Disconnecting...");
-                if (this.socket != null)
-                {
-                    this.socket.Dispose();
-                    this.socket = null;
-                }
+
+                this.socket?.Dispose();
+                this.socket = null;
 
                 this.log.Debug("Disconnected");
                 this.disconnected = true;
@@ -219,7 +224,7 @@ namespace MUnique.OpenMU.Network
             {
                 if (this.log.IsDebugEnabled)
                 {
-                    this.log.Debug($"Packet received (before decryption): {packet.AsString()}");
+                    //this.log.Debug($"Packet received (before decryption): {packet.AsString()}");
                 }
 
                 if (this.decryptor != null && !this.decryptor.Decrypt(ref packet))
@@ -233,7 +238,7 @@ namespace MUnique.OpenMU.Network
                 {
                     if (this.log.IsDebugEnabled)
                     {
-                        this.log.Debug($"Packet received (after decryption): {packet.AsString()}");
+                        //this.log.Debug($"Packet received (after decryption): {packet.AsString()}");
                     }
 
                     try

@@ -19,8 +19,9 @@
         LoginScreen.LoginClicked = null;
     }
 
-    private void ViewOnLoginClicked(string username, string password)
+    private async void ViewOnLoginClicked(string username, string password)
     {
-        GSClient.Login(username, password);
+        UnityEngine.Debug.Log($"try login with '{username}' '{password}'");
+        await GSClient.Login(username, password);
     }
 }

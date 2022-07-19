@@ -1,31 +1,33 @@
 ﻿using System;
-
-//public delegate void ServerPacketReceivedHandler(object sender, Packet packet);
+using System.Threading.Tasks;
 
 public interface ICSClient
 {
-    void Connect(string ipAddress = "localhost", int port = 44405);
+    Task Connect(string ipAddress, int port);
     void Disconnect();
 
     bool Connected { get; }
 
     event EventHandler ClientDisconnected;
 
-    //event ServerPacketReceivedHandler PacketReceived;
-
-    void RequestServerList();
-    void GetServerInfo(ushort serverId);
+    Task RequestServerList();
+    Task GetServerInfo(ushort serverId);
 }
 
 public interface IGSClient
 {
-    void Connect(string ip, int port);
+    Task Connect(string ip, int port);
     void Disconnect();
     bool Connected { get; }
 
     event EventHandler ClientDisconnected;
 
-    //event ServerPacketReceivedHandler PacketReceived;
-
-    void Login(string username, string password);
+    Task Pong();
+    Task UnknownCheck();
+    Task Login(string username, string password);
+    Task GetCharactersList();
+    Task CreateCharacter(string characterName, byte classId);
+    Task DeleteCharacter(string characterName, string securityCode);
+    Task FocusCharacter(string characterName);
+    Task SelectCharacter(string characterName);
 }

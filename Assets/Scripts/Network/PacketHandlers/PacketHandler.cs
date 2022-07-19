@@ -1,26 +1,37 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using log4net;
-using MUnique.OpenMU.Network;
+using strange.extensions.injector.api;
 
 public class PacketHandler
 {
+    private static readonly Type SubPacketHandlerInterfaceType = typeof(ISubPacketHandler);
+
     private readonly ILog log = LogManager.GetLogger(typeof(PacketHandler));
 
     private Dictionary<byte, IPacketHandler> Handlers { get; } = new Dictionary<byte, IPacketHandler>();
 
     [Inject]
     public ICoroutineExecuter CoroutineExecuter { get; private set; }
+
     [Inject]
-    public SayHelloHandler SayHelloHandler { get; private set; }
-    [Inject]
-    public CSHandlers CSHandlers { get; private set; }
+    public IInjectionBinder InjectionBinder { get; private set; }
 
     [PostConstruct]
     public void Initialize()
     {
-        Handlers.Add(0x00, SayHelloHandler);
-        Handlers.Add(0xF4, CSHandlers);
+        var packetHandlerInterfaceType = typeof(IPacketHandler);
+        var handlers = this.GetType().Assembly.GetTypes().Where(type => type.IsClass
+                                                                && type.GetInterfaces().Contains(packetHandlerInterfaceType)
+                                                                && !type.GetInterfaces().Contains(SubPacketHandlerInterfaceType));
+
+        foreach (var handlerType in handlers)
+        {
+            var handler = InjectionBinder.GetInstance(handlerType) as IPacketHandler;
+
+            Handlers.Add(handler.HandlerCode, handler);
+        }
     }
 
     public void HandlePacket(object sender, Packet packet)
@@ -38,7 +49,7 @@ public class PacketHandler
         }
         else
         {
-            log.Error($"Can't find packet handler for packet:{packet}");
+            log.Error($"[PacketHandler]Can't find packet handler for packet:{packet}");
         }
     }
 }

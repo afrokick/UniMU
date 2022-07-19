@@ -7,7 +7,7 @@ using log4net;
 
 public class MainContextView : ContextView
 {
-    private readonly ILog log = LogManager.GetLogger(typeof(GetServerListHandler));
+    private readonly ILog log = LogManager.GetLogger(typeof(MainContextView));
 
     [SerializeField]
     private Transform _uiRoot;
@@ -16,6 +16,11 @@ public class MainContextView : ContextView
     private bool _resetPlayerPrefs;
 
     private MainContext _context;
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 
     void Start()
     {
@@ -57,7 +62,7 @@ public class MainContextView : ContextView
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             DispatchSignal<HardwareBackPressSignal>();
         }

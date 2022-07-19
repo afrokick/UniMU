@@ -5,6 +5,7 @@
 namespace MUnique.OpenMU.Network
 {
     using System;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// A delegate which is executed when a packet gets received from a connection.
@@ -48,7 +49,7 @@ namespace MUnique.OpenMU.Network
         /// Sends the specified packet.
         /// </summary>
         /// <param name="packet">The packet.</param>
-        void Send(byte[] packet);
+        Task Send(byte[] packet);
 
         /// <summary>
         /// Disconnects this instance.

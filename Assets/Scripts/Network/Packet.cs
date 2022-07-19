@@ -20,7 +20,7 @@ public class Packet
         this.ToServer = toServer;
         this.Direction = this.ToServer ? "C->S" : "S->C";
 
-        ReadOffset = data.GetPacketHeaderSize() + 2;//+ code+subCode
+        ReadOffset = data.GetPacketHeaderSize() + 1;//+ code
     }
 
     /// <summary>
@@ -80,29 +80,43 @@ public class Packet
         return val;
     }
 
-    public ushort ReadShort()
+    public ushort ReadShort(bool smallEndian = true)
     {
-        var val = Data.MakeWordSmallEndian(ReadOffset);
+        var val = smallEndian ? Data.MakeWordSmallEndian(ReadOffset) : Data.MakeWordBigEndian(ReadOffset);
         ReadOffset += 2;
 
         return val;
     }
 
-    public uint ReadInt()
+    public uint ReadInt(bool smallEndian = true)
     {
-        var val = Data.MakeDwordSmallEndian(ReadOffset);
+        var val = smallEndian ? Data.MakeDwordSmallEndian(ReadOffset) : Data.MakeDwordBigEndian(ReadOffset);
         ReadOffset += 4;
+
+        return val;
+    }
+
+    public long ReadLong()
+    {
+        var val = (long)Data.MakeQword(ReadOffset);
+        ReadOffset += 8;
 
         return val;
     }
 
     public string ReadString(int size)
     {
-        UnityEngine.Debug.Log("readOffset:" + ReadOffset);
-
         var val = Data.ExtractString(ReadOffset, size, Encoding.UTF8);
         ReadOffset += size;
 
         return val;
+    }
+
+    public bool ReadBool()
+    {
+        var val = Data[ReadOffset];
+        ReadOffset++;
+
+        return val == 1;
     }
 }
