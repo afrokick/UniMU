@@ -6,6 +6,11 @@ Unity3D MU Online Client v1.04d for [OpenMU server](https://github.com/MUnique/O
 
 Development for fun
 
+## Dependencies
+
+- IoC for Unity https://github.com/strangeioc/strangeioc
+- OpenMu Network/Packets https://github.com/MUnique/OpenMU
+
 ## TODO
 
 - esteblish CS connection with OpenMU - DONE
