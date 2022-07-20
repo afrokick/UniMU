@@ -24,3 +24,7 @@ It should work with PCs.
 Maybe on Mobiles.
 
 And it doesn't work for WebGL, because currently OpenMU doesn't support WebSockets. 
+
+## Usefull materials
+
+- [MuOnline Files Description](http://site.pentiumtools.com/tips-on-using-pentium-tools/muonline-files-description)
